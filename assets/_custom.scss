@@ -1,0 +1,218 @@
+// Form to change commands
+.change-form {
+  margin-bottom: 5px;
+}
+
+.button {
+  display: inline-block;
+  color: var(--color-link);
+  background-color: var(--body-background);
+  line-height: 2rem;
+  padding: 0 1rem;
+  border: 1px solid var(--color-link);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.tooltip {
+  position: relative;
+
+  a {
+    cursor: help;
+  }
+}
+
+.tooltip span[role=tooltip] {
+  display: none;
+}
+
+.tooltip:hover span[role=tooltip] {
+  border-inline-start: .25rem solid var(--hint-color-info);
+  border-radius: .25rem;
+  display: block;
+  position: absolute;
+  bottom: 2.5em;
+  left: -6em;
+  width: 15em;
+  padding: 0.5em;
+  z-index: 100;
+  color: #000;
+  background-color: #EFF8FF;
+}
+
+// Slider to switch Alias
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+  padding-top: 5px;
+  margin-left: 5px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+//  reset button
+.reset {
+  height: 2em !important;
+  width: 2em !important;
+  display: inline-block;
+  position: relative;
+  top: 8px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+// Copy to Clipboard
+.copy-code-button {
+  color: #c9c9c9;
+  background-color: transparent;
+  border-color: #c9c9c9;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  border-top: none;
+  border-right: none;
+  border-radius: 0px 3px 0px 3px;
+
+  /* right-align */
+  display: block;
+  position: absolute;
+  right: 0px;
+  margin-bottom: -2px;
+
+  padding: 3px 8px;
+  font-size: 0.8em;
+}
+
+.book-expand-content .copy-code-button {
+  right: 1rem;
+}
+
+.book-tabs-content .copy-code-button {
+  right: 1rem;
+}
+
+.book-hint .copy-code-button {
+  right: 1rem;
+}
+
+details .copy-code-button {
+  right: 1rem;
+}
+
+.copy-code-button:hover {
+  cursor: pointer;
+  color: #002b36;
+  border-color: #c9c9c9;
+  background-color: #c9c9c9;
+}
+
+.copy-code-button:focus {
+  background-color: #c9c9c9;
+  color: #002b36;
+  outline: 0;
+}
+
+.copy-code-button:active {
+  color: #002b36;
+  background-color: #c9c9c9;
+}
+
+.highlight pre {
+  margin-top: 0;
+  border-radius: 3px;
+  padding: 10px;
+  overflow-x: auto;
+  font-size: 0.9em;
+}
+
+.markdown pre {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: $font-size-base;
+}
+
+// header
+.book-header {
+  position: sticky;
+	z-index: 1;
+	top: 0;
+  margin-left: -1px;
+  margin-bottom: 0;
+	width: calc(100% + 2px);
+  height: 60px;
+  padding-top: 15px;
+  background: var(--body-background);
+}
+header > aside {
+  margin-top: -15px;
+  background: var(--body-background);
+  border-bottom: 3px solid var(--gray-500);
+
+}
+
+article.markdown {
+  position: relative;
+}
+
+article {
+  margin-top: 15px;
+}

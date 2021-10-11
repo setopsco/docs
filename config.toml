@@ -1,0 +1,26 @@
+baseURL = "http://example.invalid/docs/"
+languageCode = "en-us"
+title = "SetOps"
+theme = "book"
+enableEmoji = true
+pygmentsUseClasses = true
+
+[menu]
+# [[menu.before]]
+[[menu.after]]
+  name = "API Reference"
+  url = "/api/"
+  weight = 10
+
+[[menu.after]]
+  name = "Support"
+  url = "mailto:support@setops.co"
+  weight = 20
+
+[params]
+BookSection = 'user'
+BookTheme = "light"
+BookLogo="setops_logo.png"
+
+[markup.goldmark.renderer]
+unsafe = true

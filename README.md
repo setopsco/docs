@@ -1,10 +1,9 @@
 <p align="center">
   <a href="https://www.setops.co">
-    <img src="static/setops_meta.png" width="318px" alt="SetOps" />
+    <img src="static/setops_meta.png" width="500px" alt="SetOps" />
   </a>
 </p>
 
----
 # User & Developer Documentation
 The user documentation is built with [hugo](https://github.com/gohugoio/hugo) and [spectacle](https://github.com/sourcey/spectacle).
 

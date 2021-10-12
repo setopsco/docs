@@ -1,26 +1,34 @@
-baseURL = "/"
+baseURL = "https://try.setops.co/"
 languageCode = "en-us"
 title = "SetOps"
 theme = "book"
 enableEmoji = true
 pygmentsUseClasses = true
+enableGitInfo = true
 
 [menu]
 # [[menu.before]]
 [[menu.after]]
+  name = "Homepage"
+  url = "https://www.setops.co"
+  weight = 10
+
+[[menu.after]]
   name = "API Reference"
   url = "/api/"
-  weight = 10
+  weight = 20
 
 [[menu.after]]
   name = "Support"
   url = "mailto:support@setops.co"
-  weight = 20
+  weight = 30
 
 [params]
 BookSection = 'user'
 BookTheme = "light"
 BookLogo="setops_logo.png"
+BookRepo = 'https://github.com/setopsco/docs'
+BookEditPath = 'edit/main'
 
 [markup.goldmark.renderer]
 unsafe = true

@@ -1,3 +1,10 @@
+<p align="center">
+  <a href="https://www.setops.co">
+    <img src="static/setops_meta.png" width="318px" alt="SetOps" />
+  </a>
+</p>
+
+---
 # User & Developer Documentation
 The user documentation is built with [hugo](https://github.com/gohugoio/hugo) and [spectacle](https://github.com/sourcey/spectacle).
 
@@ -32,7 +39,7 @@ If a feature is under development and we describe a workaround for this circumst
 
 ```
 {{< hint info >}}
-💡**Feature in Development**  
+💡**Feature in Development**
 Due to the beta status of SetOps, the `--stage` flag with `<STAGE>` needs to be set for every command.
 
 In the future, you will be able to set a default `project` and `stage` for a directory.
@@ -74,3 +81,22 @@ bookHidden: true                # Hides element in menu, still available via URL
 
 ### filetree menu
 the file `layouts/partials/docs/menu-filetree.html` is a copy of the build-in hugo-book file tree menu. We need to copy the file to implement the collapsables in the menu. The original code from the template can be found here: [alex-shpak/hugo-book](https://github.com/alex-shpak/hugo-book/blob/62004506e2fa0980777de5b1de045d5101d01f6c/layouts/partials/docs/menu-filetree.html).
+
+
+## Development
+Install [hugo](https://github.com/gohugoio/hugo)
+  - via Homebrew (recommended) `brew install hugo`
+  - Manual installation
+    - Download the *extended* version (`hugo_extended_X.Y.Z_OS-ARCH.tar.gz`) because the template needs to compile SASS/SCSS.
+    - If you install hugo from the sources, make sure to compile it with the right flags:
+
+      ```bash
+      cd <hugo-git-repository-clone>
+      go install --tags=extended
+      ```
+
+Install the `hugo-book` theme:
+```bash
+git submodule init
+git submodule update
+```

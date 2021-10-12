@@ -8,7 +8,7 @@ bookToC: false
 cascade:
   description: Makes deploying cloud applications painless. SetOps is a standardized framework upon your own AWS account. Setup & deploy cloud applications with ease!
 ---
-# SetOps
+# SetOps Documentation
 
 SetOps is your infrastructure but without the engineers. Run your web applications in production – hassle-free, highly available, and cost-efficient. SetOps supports the full lifecycle of your stateful application from deployment to monitoring and backup.
 

@@ -171,7 +171,7 @@ The backup runs at a random minute in the specified hour(s) for load balancing r
 A Scheduled Backup can also be removed from a service:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --service database backup:unschedule database
+setops -p <PROJECT> -s <STAGE> --service database backup:unschedule
 ```
 
 Last, commit the Changeset to activate the changes:

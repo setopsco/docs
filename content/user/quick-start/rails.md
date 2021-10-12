@@ -9,45 +9,37 @@ In this tutorial, you will deploy the sample application from Michael Hartl's bo
 
 ## Prepare your Code
 
-1. Get started by getting the code. You can use our fork at
-   [_setopsco/sample_app_6th_ed_](https://github.com/setopsco/sample_app_6th_ed) or [_mhartl/sample_app_6th_ed_](https://github.com/mhartl/sample_app_6th_ed).
+1. Get started by getting the code. The code is originally hosted at [_mhartl/sample_app_6th_ed_](https://github.com/mhartl/sample_app_6th_ed), but for convinience, we recommend using our fork at [_setopsco/sample_app_6th_ed_](https://github.com/setopsco/sample_app_6th_ed)
 
-   Using our fork will provide you with a verified version. The repository includes a _setops_ branch in which all necessary adjustments
-   for making the app a [Twelve-Factor App](https://12factor.net) were done already.
+   This will provide you with a verified version, and all necessary adjustments towards a [Twelve-Factor App](https://12factor.net) have already been made.
 
    ```shell
    git clone https://github.com/setopsco/sample_app_6th_ed
    ```
 
-2. Check out the _setops_ branch or apply the diff from [the pull request](https://github.com/setopsco/sample_app_6th_ed/pull/1/files) to your code.
-
-   ```shell
-   git checkout --track origin/setops
-   ```
-
 ## Build your Image
-You need to build an image of your application to deploy it with SetOps. For this tutorial, we recommend using [Cloud Native Buildpacks](https://buildpacks.io) with its [`pack` CLI](https://buildpacks.io/docs/tools/pack/) which lets you build an image with ease. However, you can also use any other tool that creates a runnable image, such as Docker. Install the CLI and get started:
+You need to build an image of your application to deploy it with SetOps. We have included a `Dockerfile` with the Rails sample app. You can use our `Dockerfile` for your own apps, too.
 
-3. Let's use [Cloud Native Buildpacks](https://buildpacks.io) for creating the App's image.
+2. Build the image using `docker build`.
 
    ```shell
-   pack build sample-app --builder heroku/buildpacks:18 --env-file .env.build
+   docker build --pull -t sample-app:latest .
    ```
 
    {{< hint info >}}
-   💡if you're not sure about building App Images and what an `.env.build` file is, have a quick look at our best practices for [building an image]({{< relref "/user/best-practices/build-image" >}}).
+   💡if you're not sure about building App Images, have a quick look at our best practices for [building an image]({{< relref "/user/best-practices/build-image" >}}).
    {{< /hint >}}
 
 ## Prepare your SetOps Environment
 At first, you need to choose a name for `project`, `stage`, and `app`. You can edit them in the form in the top right corner.
 
-4. Now we're ready to deploy this app to SetOps. Start by creating a [Project]({{< relref "/user/configuration/stages" >}}).
+3. Now we're ready to deploy this app to SetOps. Start by creating a [Project]({{< relref "/user/configuration/stages" >}}).
 
    ```shell
    setops project:create <PROJECT>
    ```
 
-5. Create a [Stage]({{< relref "/user/configuration/stages" >}}) for your project.
+4. Create a [Stage]({{< relref "/user/configuration/stages" >}}) for your project.
 
    ```shell
    setops -p <PROJECT> stage:create <STAGE>
@@ -57,7 +49,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    `project` and `stage` must only contain lowercase letters `a-z` and numbers `0-9` and start with a lowercase letter. The length of `project` has to be between 3 and 20 characters and the length of `stage` between 3 and 12. It also has to start with a lowercase letter. A valid example is `parkscheibe` & `staging`.
    {{< /hint >}}
 
-6. Create the [App]({{< relref "/user/configuration/apps" >}}) _web_.
+5. Create the [App]({{< relref "/user/configuration/apps" >}}) _web_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
@@ -67,20 +59,13 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    The name for apps must only contain lowercase letters `a-z` and numbers `0-9` and dashes `-`. The name must be between 3 and 16 characters long and start with a lowercase letter.
    {{< /hint >}}
 
-   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/user/configuration/apps#private" >}}) to _true_.
+   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/user/configuration/apps#public" >}}) to _true_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
 
-   Set the App's [container entrypoint]({{< relref "/user/configuration/apps#entrypoint" >}}) to `launcher` and the [container command]({{< relref "/user/configuration/apps#command" >}}) to the Puma webserver. Read the [buildpacks.io docs](https://buildpacks.io/docs/app-developer-guide/run-an-app/) to find out what `launcher` does and keep in mind that this entrypoint is buildpack specific.
-
-   ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set entrypoint launcher
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- bundle exec puma -C config/puma.rb
-   ```
-
-   Next, we need to change the default resources for a container since Rails' memory consumption is higher:
+   Next, we need to change the default [resources]({{< relref "/user/configuration/apps#resource-parameters" >}}) for a container since Rails' memory consumption is higher:
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 512
    ```
@@ -97,7 +82,13 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/.well-known/health-check'
    ```
 
-7. Create the [Services]({{< relref "/user/configuration/services" >}}) the App needs.
+   Last, you need to set a `SECRET_KEY_BASE` for Rails.
+
+   ```shell
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set SECRET_KEY_BASE=$(openssl rand -hex 64)
+   ```
+
+6. Create the [Services]({{< relref "/user/configuration/services" >}}) the App needs.
 
    First, create a [PostgreSQL Service]({{< relref "/user/configuration/services#postgresql" >}}) and link it to the App `<APPNAME>`.
 
@@ -117,7 +108,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    The name for services must only contain lowercase letters `a-z` and numbers `0-9` and dashes `-`. The name must be between 3 and 18 characters long and start with a lowercase letter.
    {{< /hint >}}
 
-8. Commit your [Changeset]({{< relref "/user/configuration/changesets" >}}).
+7. Commit your [Changeset]({{< relref "/user/configuration/changesets" >}}).
 
    ```shell
    setops -p <PROJECT> -s <STAGE> changeset:commit
@@ -125,7 +116,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
 
 ## Deploy your Image
 
-9. Push the image you created earlier to the SetOps [Image Registry]({{< relref "/user/interaction/app-deployment#registry" >}}).
+8. Push the image you created earlier to the SetOps [Image Registry]({{< relref "/user/interaction/app-deployment#registry" >}}).
 
    First, log in to the Image Registry. Get your login command with `setops registry:login` and follow the instructions:
 
@@ -150,21 +141,21 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    web: digest: sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c size: 3245
    ```
 
-10. Create a [release]({{< relref "/user/interaction/app-deployment#releases" >}}) and deploy it.
+9. Create a [release]({{< relref "/user/interaction/app-deployment#releases" >}}) and deploy it.
 
-      ```shell
-      setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c
-      setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
-      setops -p <PROJECT> -s <STAGE> changeset:commit
-      ```
+     ```shell
+     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c
+     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
+     setops -p <PROJECT> -s <STAGE> changeset:commit
+     ```
 
-11. Verify your app is running and its health status is `HEALTHY`.
+10. Verify your app is running and its health status is `HEALTHY`.
 
       ```shell
       setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
       ```
 
-12. We will also need to initialize the database schema and load some sample data from the seeds (`db/seeds.rb`).
+11. We will also need to initialize the database schema and load some sample data from the seeds (`db/seeds.rb`).
 
       Run `rake db:schema:load db:seed` to load the database schema and populate it with seed data:
 
@@ -172,7 +163,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
       setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:schema:load db:seed
       ```
 
-13. Open the application in your browser.
+12. Open the application in your browser.
 
       Copy the domain in format `web.staging.project.$YOURDOMAIN`.
 
@@ -180,6 +171,6 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
       setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
       ```
 
-You can log in with the sample user defined in `db/seeds.rb` - `example@railstutorial.org` and password `foobar`.
+      You can log in with the sample user defined in `db/seeds.rb`: the username is `example@railstutorial.org` with password `foobar`.
 
 Enjoy!

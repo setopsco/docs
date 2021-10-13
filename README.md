@@ -99,3 +99,7 @@ Install the `hugo-book` theme:
 git submodule init
 git submodule update
 ```
+
+### Generate the documentation pages:
+  - Development server: `hugo serve -D` (the `-D` flag makes Hugo serve draft pages with are excluded from production builds)
+  - Build a static site: `hugo --destination public`

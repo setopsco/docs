@@ -13,12 +13,12 @@
   const form = [projectInput, stageInput, appInput];
   const bannedWords = ["setops", "project", "stage", "app"]
 
-  if (projectInput) {
+  if (projectInput.length > 0) {
     // eventlistener for enter-click
     form.forEach(nodeList => {
       nodeList.forEach(el => {
         el.addEventListener("keyup", function (event) {
-          if (event.keyCode === 13) {
+          if (event.key === "Enter") {
             replaceCommands(this);
           }
         });
@@ -35,11 +35,7 @@
     // eventlistener for alias switch
     aliasSwitch.forEach(el => {
       el.addEventListener('change', function () {
-        if (this.checked) {
-          replaceOnDocument("setops -p " + project +  " -s " + stage, "sos")
-        } else {
-          replaceOnDocument("sos", "setops -p " + project + " -s " + stage)
-        }
+        replaceCommands(this)
       });
     });
 
@@ -48,7 +44,6 @@
       button.addEventListener("click", function (event) {
         aliasSwitch.forEach( el => {
           el.checked = false;
-          replaceOnDocument("sos", "setops -p " + project + " -s " + stage);
         });
         form.forEach(nodeList => {
           nodeList.forEach(el => {
@@ -120,6 +115,26 @@
         return true;
       }
     });
+
+    // identify alias switch
+    aliasSwitch.forEach(el => {
+      if (el.checked) {
+        if (tag.closest(".book-header") && el.closest(".book-header")) {
+          aliasVal = el.checked;
+          aliasStore = true;
+          return false;
+        } else {
+          aliasVal = el.checked;
+          aliasStore = true;
+          return true;
+        }
+      } else {
+        el.checked = false;
+        aliasVal = false;
+        aliasStore = false;
+        return true;
+      }
+    });
   }
 
   function replaceCommands(tag) {
@@ -139,6 +154,13 @@
       app = appVal;
       setLocalStorage("SetOpsApp", appVal, appStore);
     }
+    if (aliasVal) {
+      replaceOnDocument("setops -p " + project +  " -s " + stage, "sos")
+    } else {
+      replaceOnDocument("sos", "setops -p " + project + " -s " + stage)
+    }
+    setLocalStorage("SetOpsAlias", aliasVal, aliasStore);
+
   }
 
   const replaceOnDocument = (pattern, string, {target = document.body} = {}) => {
@@ -180,5 +202,12 @@
       el.value = localStorage.getItem("SetOpsApp");
     })
   }
-  replaceCommands(changeButton[0]);
+  if (localStorage.getItem("SetOpsAlias")) {
+    aliasSwitch.forEach(el => {
+      el.checked = localStorage.getItem("SetOpsAlias");
+    })
+  }
+  if (projectInput.length > 0) {
+    replaceCommands(changeButton[0]);
+  }
 })();

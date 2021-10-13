@@ -14,17 +14,22 @@ enableGitInfo = true
   weight = 10
 
 [[menu.after]]
+  name = "GitHub"
+  url = "https://github.com/setopsco"
+  weight = 20
+
+[[menu.after]]
   name = "API Reference"
   url = "/api/"
-  weight = 20
+  weight = 30
 
 [[menu.after]]
   name = "Support"
   url = "mailto:support@setops.co"
-  weight = 30
+  weight = 40
 
 [params]
-BookSection = 'user'
+BookSection = '/latest/user'
 BookTheme = "light"
 BookLogo="setops_logo.png"
 BookRepo = 'https://github.com/setopsco/docs'

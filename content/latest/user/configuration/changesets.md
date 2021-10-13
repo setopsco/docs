@@ -4,7 +4,7 @@ weight: 20
 # Changesets
 
 {{< hint info >}}
-💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/user/concepts" >}})).
+💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/latest/user/concepts" >}})).
 {{< /hint >}}
 
 You will use a **Changeset** for making any changes to a stage. You will always add a set of commands to your Changeset and commit it to make your change live (or you discard the changeset). Changesets work just like the Git staging area in your local repository: you add some files, then you commit.
@@ -75,4 +75,4 @@ setops -p <PROJECT> -s <STAGE> changeset:discard
 
 ## Going further
 
-[Create your first App]({{< relref "apps" >}}) with a Changeset.
+[Create your first App]({{< relref "/latest/user/configuration/apps" >}}) with a Changeset.

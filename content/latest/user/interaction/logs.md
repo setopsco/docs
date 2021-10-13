@@ -23,7 +23,7 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> log
 ```
 
 {{< hint warning >}}
-If you can't see some logs, check out our troubleshooting regarding the _Solarized Dark Theme_ [here]({{< relref "/user/support/troubleshooting#why-do-i-not-see-some-logs" >}}).
+If you can't see some logs, check out our troubleshooting regarding the _Solarized Dark Theme_ [here]({{< relref "/latest/user/support/troubleshooting#why-do-i-not-see-some-logs" >}}).
 {{< /hint >}}
 
 The output of this command can be configured to your specific needs by adding additional flags.

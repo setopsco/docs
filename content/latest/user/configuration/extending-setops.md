@@ -25,7 +25,7 @@ This section explains how to create a peering request with some 3rd-party servic
 
 #### MongoDB Atlas
 
-A possible use-case is the integration of [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). Atlas offers fully managed MongoDB database clusters on all major cloud providers. SetOps already provides the [DocumentDB service with MongoDB compatibility]({{< relref "/user/configuration/services#mongodb4" >}}) out of the box, but it comes with some limitations. If your application requires a *real* MongoDB database, Atlas could be a service you want to use. To connect your Atlas database clusters to SetOps and make it available to your apps, follow these steps:
+A possible use-case is the integration of [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). Atlas offers fully managed MongoDB database clusters on all major cloud providers. SetOps already provides the [DocumentDB service with MongoDB compatibility]({{< relref "/latest/user/configuration/services#mongodb4" >}}) out of the box, but it comes with some limitations. If your application requires a *real* MongoDB database, Atlas could be a service you want to use. To connect your Atlas database clusters to SetOps and make it available to your apps, follow these steps:
 
 1. Request peering infos from [SetOps Support](mailto://support@setops.co). The support will provide the following information:
     * AWS Account ID - can also be found in *My Account* in your AWS Console

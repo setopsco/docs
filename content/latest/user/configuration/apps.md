@@ -3,7 +3,7 @@ weight: 30
 ---
 # Apps
 {{< hint info >}}
-💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/user/concepts" >}})).
+💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/latest/user/concepts" >}})).
 {{< /hint >}}
 
 An **App** is a task that the SetOps platform runs. A stage may have many Apps. Apps are always assumed
@@ -36,7 +36,7 @@ The reason for this is that the `app:create` command did not change anything imm
 
 Run `changeset:commit` to commit the Changeset.
 
-[Read more on Changesets here.]({{< relref "/user/configuration/changesets" >}})
+[Read more on Changesets here.]({{< relref "/latest/user/configuration/changesets" >}})
 
 ## Configuration Overview
 
@@ -196,7 +196,7 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:unset entrypoint
 ### Container Health Check
 
 {{< hint info >}}
-Check out the [Health Checks]({{< relref "/user/configuration/apps#health-checks" >}}) section if you want to get more information about the difference between `container` and `network` Health Checks.
+Check out the [Health Checks]({{< relref "/latest/user/configuration/apps#health-checks" >}}) section if you want to get more information about the difference between `container` and `network` Health Checks.
 {{< /hint >}}
 
 The Container Health Check configuration determines how the health of a container is monitored. The system periodically runs a command you specify inside your App's container. The command exit code determines the healthiness of the container. When it returns with exit code `0`, the check is deemed successful. Should it return with any other exit code, the check is failed and the container is unhealthy. After the given grace period specified by `interval`, `timeout`, `retries`, and `start-period`, the container will be terminated and replaced with a new one. It is recommended to set the `start-period` to a big enough value so that the app can start and warm up and the `interval`, `timeout` and `retries` to a low value so that downtimes are quickly detected.
@@ -382,7 +382,7 @@ You can remove the custom port by running `network:unset port`. The app will the
 ### Network Health Check
 
 {{< hint info >}}
-Check out the [Health Checks]({{< relref "/user/configuration/apps#health-checks" >}}) section if you want to get more information about the difference between `container` and `network` Health Checks.
+Check out the [Health Checks]({{< relref "/latest/user/configuration/apps#health-checks" >}}) section if you want to get more information about the difference between `container` and `network` Health Checks.
 {{< /hint >}}
 
 The Network Health Check is a mandatory check for every App. Its implementation depends on the [Protocol](#protocol) setting:
@@ -428,7 +428,7 @@ To set the status code range, use `network:set health-check-status RANGE`. The r
 |`200-299,301`| `200` through `299` and `301` |
 
 {{< hint warning >}}
-Please note that although 200-499 is a valid port range for this option, all Health Check responses with HTTP status codes 400 and higher will currently lead to an availability alert if you have configured a [target]({{< relref "/user/configuration/notifications#webhook" >}}). The app will still be available and work but the alert must be ignored. Therefore we recommend to always use a status code below 400 or a path without authorization if that causes a 401 or 403 response.
+Please note that although 200-499 is a valid port range for this option, all Health Check responses with HTTP status codes 400 and higher will currently lead to an availability alert if you have configured a [target]({{< relref "/latest/user/configuration/notifications#webhook" >}}). The app will still be available and work but the alert must be ignored. Therefore we recommend to always use a status code below 400 or a path without authorization if that causes a 401 or 403 response.
 {{< /hint >}}
 
 ```shell
@@ -711,4 +711,4 @@ If `dig` does not print the expected value, double check your DNS settings and t
 
 ## Going further
 
-[Create a Service]({{< relref "services" >}}) for your new App.
+[Create a Service]({{< relref "/latest/user/configuration/services" >}}) for your new App.

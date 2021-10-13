@@ -108,4 +108,4 @@ You are now ready to use the SetOps CLI.
 
 ## Going further
 
-[Read more about the concepts]({{< relref "concepts" >}}) which power SetOps.
+[Read more about the concepts]({{< relref "/latest/user/concepts" >}}) which power SetOps.

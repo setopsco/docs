@@ -110,4 +110,4 @@ A command without a colon-separated subcommand is the list command, returning a 
 
 ## Going further
 
-Follow a [Quick Start Guide]({{< relref "quick-start" >}}) to learn how to deploy your first App to SetOps or [learn more about Stages]({{< relref "configuration/stages" >}}).
+Follow a [Quick Start Guide]({{< relref "/latest/user/quick-start" >}}) to learn how to deploy your first App to SetOps or [learn more about Stages]({{< relref "/latest/user/configuration/stages" >}}).

@@ -6,7 +6,7 @@ title: "One-Off Tasks"
 
 You will use One-Off Tasks to run certain commands on a one-time basis. For example, you could use this to run database migrations or to debug your App.
 
-A One-Off Task starts a new container for an App with a certain Release. By default, this will be the [Active Release]({{< relref "./app-deployment#releases" >}}) for the App, but it can be overridden.
+A One-Off Task starts a new container for an App with a certain Release. By default, this will be the [Active Release]({{< relref "/latest/user/interaction/app-deployment#releases" >}}) for the App, but it can be overridden.
 
 {{< hint warning >}}
 A One-Off Task can run up to 24h and will be terminated when it exceeds this limit.
@@ -23,7 +23,7 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- echo "Hello World"
 
 One-Off tasks can be configured with the following parameters.
 - `--release RELEASEID` run a one- off task for a specific release
-- `--cpu CPUVALUE --memory MEMORYVALUE` run a task with a specific resource configuration (see [App Resources]({{< relref "../configuration/apps#resources" >}}) for valid values)
+- `--cpu CPUVALUE --memory MEMORYVALUE` run a task with a specific resource configuration (see [App Resources]({{< relref "/latest/user/configuration/apps#resources" >}}) for valid values)
 - `--entrypoint "list,of,commands"` overwrite the container entrypoint for the task
 
 The following snippet is an example for a command using all configuration options.

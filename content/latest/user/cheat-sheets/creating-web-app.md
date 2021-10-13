@@ -4,10 +4,10 @@ weight: 20
 # Commands for creating a Web App
 
 {{< hint info >}}
-💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/user/concepts" >}})).
+💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/latest/user/concepts" >}})).
 {{< /hint >}}
 
-We recommend creating shortcuts for the commands `setops` and `setops -p <PROJECT> -s <STAGE>`. See our best practices for setting an [Alias]({{< relref "/user/best-practices/alias" >}}).
+We recommend creating shortcuts for the commands `setops` and `setops -p <PROJECT> -s <STAGE>`. See our best practices for setting an [Alias]({{< relref "/latest/user/best-practices/alias" >}}).
 
 ## Create Project and Stage
 ```shell
@@ -39,7 +39,7 @@ setops -p <PROJECT> -s <STAGE> app:info <APPNAME>  # shows ENVs, domain, release
 ```
 
 ## Set Environment Variables (ENV) for App
-See best practices for [migrating ENV variables]({{< relref "/user/best-practices/migrate-environment-variables" >}}).
+See best practices for [migrating ENV variables]({{< relref "/latest/user/best-practices/migrate-environment-variables" >}}).
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set APPLICATION_PORT=5000
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set RAILS_ENV=production
@@ -62,7 +62,7 @@ setops -p <PROJECT> -s <STAGE> changeset:commit
 ```
 
 ## Create Release for App
-First, you need to build a docker image for your application. Then push it to the SetOps docker image registry. Look at best practices for [building an Image]({{< relref "/user/best-practices/build-image" >}})
+First, you need to build a docker image for your application. Then push it to the SetOps docker image registry. Look at best practices for [building an Image]({{< relref "/latest/user/best-practices/build-image" >}})
 ```shell
 setops registry:login
 docker tag [MYAPP] zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
@@ -101,7 +101,7 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- printenv | grep S3_DA
 ```
 
 ## Upload Database & S3 Data
-See [Backup & Restore]({{< relref "/user/interaction/backup-restore" >}}) for further information.
+See [Backup & Restore]({{< relref "/latest/user/interaction/backup-restore" >}}) for further information.
 ```shell
 setops -p <PROJECT> -s <STAGE> --service <SERVICE> backup
 setops -p <PROJECT> -s <STAGE> --service <SERVICE> backup:upload </path/to/my/backup>

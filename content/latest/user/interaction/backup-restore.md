@@ -4,7 +4,7 @@ title: Backup & Restore
 
 # Backup & Restore
 
-SetOps supports backup and restore for [Services]({{< relref "/user/configuration/services" >}}). This feature allows you to periodically backup your data, restore a service to an earlier snapshot and is useful to migrate your apps from and to SetOps. Detailed configuration and usage steps for all of these use cases are outlined below.
+SetOps supports backup and restore for [Services]({{< relref "/latest/user/configuration/services" >}}). This feature allows you to periodically backup your data, restore a service to an earlier snapshot and is useful to migrate your apps from and to SetOps. Detailed configuration and usage steps for all of these use cases are outlined below.
 
 ## List all backups
 
@@ -32,7 +32,7 @@ A backup can be in one of three states:
 - `RESTORING`: the backup is currently being restored, it can't be deleted
 
 {{< hint info >}}
-💡 Note that [Scheduled Backups](/docs/user/configuration/services#scheduled-backups) will not appear in this list as `CREATING`. They will rather show as `CREATED` once they are done.
+💡 Note that [Scheduled Backups](/docs/latest/user/configuration/services#scheduled-backups) will not appear in this list as `CREATING`. They will rather show as `CREATED` once they are done.
 {{< /hint >}}
 
 ## Create a backup
@@ -50,7 +50,7 @@ Status:   CREATING
 Note that the backup can only be downloaded or restored when it has the status `CREATED`. Use `backup` to check that it is `CREATED`.
 
 {{< hint info >}}
-💡 You can configure SetOps to automatically create backups of the Service. Refer to [the Services section](/docs/user/configuration/services#scheduled-backups) to learn more.
+💡 You can configure SetOps to automatically create backups of the Service. Refer to [the Services section](/docs/latest/user/configuration/services#scheduled-backups) to learn more.
 {{< /hint >}}
 
 ## Restore a backup
@@ -99,7 +99,7 @@ Restoring to a new service will create an identical replica of an existing servi
 
 To achieve this, follow these steps:
 
-1. Create a new Service with the same configuration as the existing one. See [Showing information about a Service]({{< relref "/user/configuration/services#show" >}}) and [Create a new Service]({{< relref "/user/configuration/services#create" >}}). Make sure to [commit your changes]({{< relref "/user/configuration/changesets" >}}) before continuing.
+1. Create a new Service with the same configuration as the existing one. See [Showing information about a Service]({{< relref "/latest/user/configuration/services#show" >}}) and [Create a new Service]({{< relref "/latest/user/configuration/services#create" >}}). Make sure to [commit your changes]({{< relref "/latest/user/configuration/changesets" >}}) before continuing.
 
 1. [Download the backup](#download-a-backup) from the existing service.
 
@@ -107,7 +107,7 @@ To achieve this, follow these steps:
 
 1. [Restore the backup](#restore-an-existing-service) to the new service.
 
-1. [Link the new service]({{< relref "/user/configuration/services#links" >}}) to your app(s). If you want to replace the old service, unlink the old service and link the new service with the same environment key.
+1. [Link the new service]({{< relref "/latest/user/configuration/services#links" >}}) to your app(s). If you want to replace the old service, unlink the old service and link the new service with the same environment key.
 
 ## Upload a backup
 

@@ -5,7 +5,7 @@ title: "Projects and Stages"
 # Project and Stages
 
 {{< hint info >}}
-💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/user/concepts" >}})).
+💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/latest/user/concepts" >}})).
 {{< /hint >}}
 
 ## Project
@@ -133,7 +133,7 @@ Created By:   karl.ranseier@setops.co
 [Commit progress...]
 ```
 
-Look at the [Apps]({{< relref "/user/configuration/apps" >}}) guide to learn how to deploy your application.
+Look at the [Apps]({{< relref "/latest/user/configuration/apps" >}}) guide to learn how to deploy your application.
 
 ### Delete a Stage
 
@@ -193,7 +193,7 @@ Role:    member
 Rick will now see the Stage too.
 
 In case Rick has no SetOps account yet, he will receive an email with an
-activation code and further informations on how to [sign up]({{< relref "installation#sign-up" >}})
+activation code and further informations on how to [sign up]({{< relref "/latest/user/installation#sign-up" >}})
 for a new account.
 
 `user:invite EMAIL` has an optional flag `--role ROLE`. Two roles are currently supported:
@@ -259,4 +259,4 @@ Adding a user to a Project provides access to all Stages on the Project. Make su
 
 ## Going further
 
-[Learn about Changesets]({{< relref "changesets" >}}) to configure your Stage.
+[Learn about Changesets]({{< relref "/latest/user/configuration/changesets" >}}) to configure your Stage.

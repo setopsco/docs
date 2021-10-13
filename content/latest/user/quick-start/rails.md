@@ -27,19 +27,19 @@ You need to build an image of your application to deploy it with SetOps. We have
    ```
 
    {{< hint info >}}
-   💡if you're not sure about building App Images, have a quick look at our best practices for [building an image]({{< relref "/user/best-practices/build-image" >}}).
+   💡if you're not sure about building App Images, have a quick look at our best practices for [building an image]({{< relref "/latest/user/best-practices/build-image" >}}).
    {{< /hint >}}
 
 ## Prepare your SetOps Environment
 At first, you need to choose a name for `project`, `stage`, and `app`. You can edit them in the form in the top right corner.
 
-3. Now we're ready to deploy this app to SetOps. Start by creating a [Project]({{< relref "/user/configuration/stages" >}}).
+3. Now we're ready to deploy this app to SetOps. Start by creating a [Project]({{< relref "/latest/user/configuration/stages" >}}).
 
    ```shell
    setops project:create <PROJECT>
    ```
 
-4. Create a [Stage]({{< relref "/user/configuration/stages" >}}) for your project.
+4. Create a [Stage]({{< relref "/latest/user/configuration/stages" >}}) for your project.
 
    ```shell
    setops -p <PROJECT> stage:create <STAGE>
@@ -49,7 +49,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    `project` and `stage` must only contain lowercase letters `a-z` and numbers `0-9` and start with a lowercase letter. The length of `project` has to be between 3 and 20 characters and the length of `stage` between 3 and 12. It also has to start with a lowercase letter. A valid example is `parkscheibe` & `staging`.
    {{< /hint >}}
 
-5. Create the [App]({{< relref "/user/configuration/apps" >}}) _web_.
+5. Create the [App]({{< relref "/latest/user/configuration/apps" >}}) _web_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
@@ -59,24 +59,24 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    The name for apps must only contain lowercase letters `a-z` and numbers `0-9` and dashes `-`. The name must be between 3 and 16 characters long and start with a lowercase letter.
    {{< /hint >}}
 
-   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/user/configuration/apps#public" >}}) to _true_.
+   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/latest/user/configuration/apps#public" >}}) to _true_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
 
-   Next, we need to change the default [resources]({{< relref "/user/configuration/apps#resource-parameters" >}}) for a container since Rails' memory consumption is higher:
+   Next, we need to change the default [resources]({{< relref "/latest/user/configuration/apps#resource-parameters" >}}) for a container since Rails' memory consumption is higher:
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 512
    ```
 
-   Let's also configure a [container Health Check]({{< relref "/user/configuration/apps#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
+   Let's also configure a [container Health Check]({{< relref "/latest/user/configuration/apps#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
    ```
 
-   The Health Check path deviates from the default path (`/`), so you need to adjust the [network Health Check]({{< relref "/user/configuration/apps#network-health-check" >}}) as well.
+   The Health Check path deviates from the default path (`/`), so you need to adjust the [network Health Check]({{< relref "/latest/user/configuration/apps#network-health-check" >}}) as well.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/.well-known/health-check'
@@ -88,16 +88,16 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set SECRET_KEY_BASE=$(openssl rand -hex 64)
    ```
 
-6. Create the [Services]({{< relref "/user/configuration/services" >}}) the App needs.
+6. Create the [Services]({{< relref "/latest/user/configuration/services" >}}) the App needs.
 
-   First, create a [PostgreSQL Service]({{< relref "/user/configuration/services#postgresql" >}}) and link it to the App `<APPNAME>`.
+   First, create a [PostgreSQL Service]({{< relref "/latest/user/configuration/services#postgresql" >}}) and link it to the App `<APPNAME>`.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> service:create database --type postgresql11 --plan shared
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create database --env-key DATABASE_URL
    ```
 
-   Next, create a [S3 Object Store Service]({{< relref "/user/configuration/services#s3" >}}) and link it to the App `<APPNAME>`.
+   Next, create a [S3 Object Store Service]({{< relref "/latest/user/configuration/services#s3" >}}) and link it to the App `<APPNAME>`.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> service:create store --type s3 --plan default
@@ -108,7 +108,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    The name for services must only contain lowercase letters `a-z` and numbers `0-9` and dashes `-`. The name must be between 3 and 18 characters long and start with a lowercase letter.
    {{< /hint >}}
 
-7. Commit your [Changeset]({{< relref "/user/configuration/changesets" >}}).
+7. Commit your [Changeset]({{< relref "/latest/user/configuration/changesets" >}}).
 
    ```shell
    setops -p <PROJECT> -s <STAGE> changeset:commit
@@ -116,7 +116,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
 
 ## Deploy your Image
 
-8. Push the image you created earlier to the SetOps [Image Registry]({{< relref "/user/interaction/app-deployment#registry" >}}).
+8. Push the image you created earlier to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}).
 
    First, log in to the Image Registry. Get your login command with `setops registry:login` and follow the instructions:
 
@@ -141,7 +141,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    web: digest: sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c size: 3245
    ```
 
-9. Create a [release]({{< relref "/user/interaction/app-deployment#releases" >}}) and deploy it.
+9. Create a [release]({{< relref "/latest/user/interaction/app-deployment#releases" >}}) and deploy it.
 
      ```shell
      setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c

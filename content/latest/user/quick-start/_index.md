@@ -21,6 +21,6 @@ With these guides, you can learn how to deploy your app to SetOps quickly. Every
 ## Choose your Language or Framework
 We have prepared easy-to-understand guides for the following popular frameworks:
 
-- [Ruby on Rails with PostgreSQL and S3]({{< relref "rails" >}})
+- [Ruby on Rails with PostgreSQL and S3]({{< relref "/latest/user/quick-start/rails" >}})
 
 Guides for other languages and frameworks will follow.

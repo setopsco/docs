@@ -46,12 +46,12 @@ In the future, you will be able to set a default `project` and `stage` for a dir
 ```
 
 ### Best Practices
-If we came up with a good way to deal with external constraints (e.g. building an image, alias, migrate ENV), we would like to share this knowledge as Best Practices. As a user, I want to get a friendly hint to our [Best Practices](content/user/best-practices) with the hint, that this only one possible way to deal with it.
+If we came up with a good way to deal with external constraints (e.g. building an image, alias, migrate ENV), we would like to share this knowledge as Best Practices. As a user, I want to get a friendly hint to our [Best Practices](content/latest/user/best-practices) with the hint, that this only one possible way to deal with it.
 
 If you think, that a solution should not be part of the docs, think about a best practice page.
 
 ### Bugs and Troubleshoot
-When there is a bug or something that is not acting expectedly, add it to the [troubleshooting](content/user/support/troubleshooting.md). Add a hint to the corresponding page (eg. [logs](content/user/interaction/logs.md) -> solarized dark issue) which links to the troubleshooting.
+When there is a bug or something that is not acting expectedly, add it to the [troubleshooting](content/latest/user/support/troubleshooting.md). Add a hint to the corresponding page (eg. [logs](content/latest/user/interaction/logs.md) -> solarized dark issue) which links to the troubleshooting.
 
 
 ## Custom JavaScript & CSS

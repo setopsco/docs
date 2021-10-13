@@ -4,7 +4,7 @@ weight: 40
 # Services
 
 {{< hint info >}}
-💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/user/concepts" >}})).
+💡 You can replace the default values of the commands for `PROJECT`, `STAGE` and `APPNAME` in the form on the right side! A standard pattern might be `myproject`, `production` and `web` (see [concepts]({{< relref "/latest/user/concepts" >}})).
 {{< /hint >}}
 
 A **Service** is an additional component such as a PostgreSQL. Services provide additional functionality and can be linked to be used in Apps.
@@ -271,7 +271,7 @@ The additional storage is in increments of whichever of the following is greater
 * Storage growth prediction for 7 hours change in the past hour.
 
 {{< hint warning >}}
-To receive alerts when PostgreSQL runs out of storage, make sure to set up [notifications]({{< relref "/user/configuration/notifications" >}}) properly.
+To receive alerts when PostgreSQL runs out of storage, make sure to set up [notifications]({{< relref "/latest/user/configuration/notifications" >}}) properly.
 {{< /hint >}}
 
 Last, after changing at least one of the values commit the Changeset:
@@ -653,4 +653,4 @@ If you accidentally deleted the service, please reach out to us as we *MAY* be a
 
 ## Going further
 
-[Monitor your App]({{< relref "notifications" >}}) with Notifications.
+[Monitor your App]({{< relref "/latest/user/configuration/notifications" >}}) with Notifications.

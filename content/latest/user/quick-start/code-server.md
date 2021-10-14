@@ -48,12 +48,6 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    ```
 
-   Next, we need to change the default [resources]({{< relref "/latest/user/configuration/apps#resource-parameters" >}}) for a container:
-   ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set cpu 512
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 1024
-   ```
-
 1. Create the [Services]({{< relref "/latest/user/configuration/services" >}}) the App needs.
 
    We need to create a [Volume]({{< relref "/latest/user/configuration/services#volume" >}}) for the data and link it to the App `<APPNAME>`.
@@ -89,15 +83,15 @@ You need to build an image of the application to deploy it with SetOps. We use t
    [...]
    Run the following command to log into the Docker registry:
 
-   printf YOURTOKEN | docker login -u setops --password-stdin zweitag.setops.net
+   printf YOURTOKEN | docker login -u setops --password-stdin try.setops.net
    [...]
    ```
 
    Next, push the Docker image to the registry:
 
    ```shell
-   docker tag gitpod/openvscode-server:latest zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag gitpod/openvscode-server:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    ```
@@ -137,8 +131,6 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops project:create <PROJECT>
    setops -p <PROJECT> stage:create <STAGE>
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set cpu 512
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 1024
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    setops -p <PROJECT> -s <STAGE> service:create volume --type volume
@@ -149,8 +141,8 @@ If you don’t want explanations for all the commands, you can use these snippet
    ### Push App to SetOps Registry
    ```shell
    docker pull gitpod/openvscode-server:latest
-   docker tag gitpod/openvscode-server:latest zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag gitpod/openvscode-server:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    ### Deploy App

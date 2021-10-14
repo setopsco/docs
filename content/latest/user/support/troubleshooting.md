@@ -30,8 +30,8 @@ Under some circumstances, the tasks are stuck in the *pending or waiting for clu
 |Possible Causes|Solution|
 |---|---|
 |The application does not start properly or has a failing Health Check|Have a look at the logs of your application, e.g. `setops -p <PROJECT> -s <STAGE> --app <APPNAME> log --all-health-checks`, and fix the errors if any.|
-|The current SetOps environment cannot fulfill your resource request|Reduce the [resources requested]({{< relref "/latest/user/configuration/apps#resources" >}}) for your app. If the app can be started then slowly increase the resource limits to the limits your app requires. You could also keep the limits lower and increase the [scale of your app]({{< relref "/latest/user/configuration/apps#scale" >}}). If it cannot be started with the increased resources and you really require the resources, contact the [SetOps Support](https://zweitag.slack.com/archives/C01FERAS4KX).|
-|None of the above applies|Contact the [SetOps Support](https://zweitag.slack.com/archives/C01FERAS4KX).|
+|The current SetOps environment cannot fulfill your resource request|Reduce the [resources requested]({{< relref "/latest/user/configuration/apps#resources" >}}) for your app. If the app can be started then slowly increase the resource limits to the limits your app requires. You could also keep the limits lower and increase the [scale of your app]({{< relref "/latest/user/configuration/apps#scale" >}}). If it cannot be started with the increased resources and you really require the resources, contact the [SetOps Support](mailto:support@setops.co).|
+|None of the above applies|Contact the [SetOps Support](mailto:support@setops.co).|
 
 ## Why do I not see some logs?
 Maybe because you're using the Solarized Dark Theme for xterm, e.g. with iTerm.

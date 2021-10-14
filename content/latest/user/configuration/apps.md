@@ -539,11 +539,11 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
 
 ### Private Domain
 
-An App always has a private domain at `app.stage.project.$YOURDOMAIN.internal` (e.g. _web.staging.parkscheibe.zweitagapps.internal_), only resolvable within the SetOps stage. The purpose of this domain is that Apps can reach each other without the need to be exposed to the internet.
+An App always has a private domain at `app.stage.project.$YOURDOMAIN.internal` (e.g. _web.staging.parkscheibe.setopsapps.internal_), only resolvable within the SetOps stage. The purpose of this domain is that Apps can reach each other without the need to be exposed to the internet.
 
 ### Public Default Domain
 
-An App is also available via a public default domain at `app.stage.project.$YOURDOMAIN` (e.g. _web.staging.parkscheibe.zweitagapps.net_), when the App is not [set to private](#private).
+An App is also available via a public default domain at `app.stage.project.$YOURDOMAIN` (e.g. _web.staging.parkscheibe.setopsapps.net_), when the App is not [set to private](#private).
 
 ### Public Custom Domains
 

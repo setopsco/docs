@@ -23,5 +23,6 @@ We have prepared easy-to-understand guides for the following popular frameworks:
 
 - [Ruby on Rails with PostgreSQL and S3]({{< relref "/latest/user/quick-start/rails" >}})
 - [VSCode Server]({{< relref "/latest/user/quick-start/code-server" >}})
+- [Hasura GraphQL Engine]({{< relref "/latest/user/quick-start/hasura" >}})
 
 Guides for other languages and frameworks will follow.

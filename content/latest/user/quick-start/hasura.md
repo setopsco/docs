@@ -1,12 +1,12 @@
 ---
-title: VSCode Server
-weight: 20
+title: Hasura GraphQL Engine
+weight: 30
 ---
-# VSCode in the Browser
+# Hasura GraphQL API Engine
 
-![VS Code in Browser](open-vscode-app.png)
+![Hasura](hasura.gif)
 
-In this tutorial, you will deploy your own [OpenVSCode Server](https://github.com/gitpod-io/openvscode-server) from gitpod.io. We will explain all the necessary SetOps commands that we need to deploy the application. You can find a summary of all commands [at the end]({{< relref "#commands-summary" >}}).
+In this tutorial, you will deploy your own [Hasura GraphQL Engine](https://github.com/hasura/graphql-engine). We will explain all the necessary SetOps commands that we need to deploy the application. You can find a summary of all commands [at the end]({{< relref "#commands-summary" >}}).
 
 ## Prepare your SetOps Environment
 {{< hint info >}}
@@ -43,18 +43,35 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
-   The default exposed [port]({{< relref "/latest/user/configuration/apps#public" >}}) of the Server is `3000`, so let's change it:
+   The default exposed [port]({{< relref "/latest/user/configuration/apps#public" >}}) of the Server is `8080`, so let's change it:
    ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 8080
+   ```
+   The Health Check path deviates from the default path (`/`), so you need to adjust the [network Health Check]({{< relref "/latest/user/configuration/apps#network-health-check" >}}) as well.
+
+   ```shell
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/healthz'
    ```
 
+   Last you need to set some [environment variables]({{< relref "latest/user/configuration/apps#environment-variables" >}}) to run the GraphQL Engine:
+   ```Shell
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_ENABLE_CONSOLE=true
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_DEV_MODE=true
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_ENABLED_LOG_TYPES="startup, http-log, webhook-log, websocket-log, query-log"
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_ADMIN_SECRET=setopsftw
+   ```
 1. Create the [Services]({{< relref "/latest/user/configuration/services" >}}) the App needs.
 
-   We need to create a [Volume]({{< relref "/latest/user/configuration/services#volume" >}}) for the data and link it to the App `<APPNAME>`.
+   We need to create a [PostgreSQL Service]({{< relref "/latest/user/configuration/services#postgresql" >}}) and link it to the App `<APPNAME>`.
 
    ```shell
-   setops -p <PROJECT> -s <STAGE> service:create volume --type volume
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create volume --path /home/workspace
+   setops -p <PROJECT> -s <STAGE> service:create database --type postgresql11 --plan shared
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create database --env-key HASURA_GRAPHQL_DATABASE_URL
+   ```
+
+   Next we need to install the [PostgreSQL Extension]({{< relref "/latest/user/configuration/services#postgresql-extensions" >}}) `pgcrypto`:
+   ```shell
+   setops -p <PROJECT> -s <STAGE> --service database option:set extensions pgcrypto
    ```
 
 1. Commit your [Changeset]({{< relref "/latest/user/configuration/changesets" >}}).
@@ -64,12 +81,12 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    ```
 
 ## Pull your Image
-You need to build an image of the application to deploy it with SetOps. We use the Docker Image from [dockerhub](https://hub.docker.com/r/gitpod/openvscode-server). You can use our `Dockerfile` for your own apps, too.
+You need to build an image of the application to deploy it with SetOps. We use the Docker Image from [dockerhub](https://hub.docker.com/r/hasura/graphql-engine). You can use our `Dockerfile` for your own apps, too.
 
 6. Pull the image using `docker pull`.
 
    ```shell
-   docker pull gitpod/openvscode-server:latest
+   docker pull hasura/graphql-engine:latest
    ```
 
 ## Deploy your Image
@@ -90,7 +107,7 @@ You need to build an image of the application to deploy it with SetOps. We use t
    Next, push the Docker image to the registry:
 
    ```shell
-   docker tag gitpod/openvscode-server:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag hasura/graphql-engine:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
@@ -120,6 +137,7 @@ You need to build an image of the application to deploy it with SetOps. We use t
       ```shell
       setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
       ```
+      You can log in with the secret defined in the environment variable: `setopsftw`.
 
 Enjoy!
 
@@ -131,17 +149,23 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops project:create <PROJECT>
    setops -p <PROJECT> stage:create <STAGE>
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 8080
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
-   setops -p <PROJECT> -s <STAGE> service:create volume --type volume
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create volume --path /home/workspace
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/healthz'
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_ENABLE_CONSOLE=true
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_DEV_MODE=true
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_ENABLED_LOG_TYPES="startup, http-log, webhook-log, websocket-log, query-log"
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set HASURA_GRAPHQL_ADMIN_SECRET=setopsftw
+   setops -p <PROJECT> -s <STAGE> service:create database --type postgresql11 --plan shared
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create database --env-key HASURA_GRAPHQL_DATABASE_URL
+   setops -p <PROJECT> -s <STAGE> --service database option:set extensions pgcrypto
    setops -p <PROJECT> -s <STAGE> changeset:commit
    ```
 
    ### Push App to SetOps Registry
    ```shell
-   docker pull gitpod/openvscode-server:latest
-   docker tag gitpod/openvscode-server:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker pull hasura/graphql-engine:latest
+   docker tag hasura/graphql-engine:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 

@@ -5,6 +5,7 @@ theme = "book"
 enableEmoji = true
 pygmentsUseClasses = true
 enableGitInfo = true
+disableKinds = ['taxonomyTerm']
 
 [menu]
 # [[menu.before]]

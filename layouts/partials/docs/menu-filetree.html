@@ -34,7 +34,6 @@
       <a {{ if .Page.Content }}href="{{ .Page.RelPermalink }}"{{ end }} class="{{ if or $current $ancestor}}active{{ end }}">
         <h2>{{- partial "docs/title" .Page -}}</h2>
       </a>
-      <span>▾</span>
     </label>
   {{ else if .Page.Content }}
     <a href="{{ .Page.RelPermalink }}" class="{{ if $current }} active{{ end }}">

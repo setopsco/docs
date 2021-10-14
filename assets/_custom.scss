@@ -101,6 +101,14 @@ input:checked + .slider:before {
   transform: translateX(18px);
 }
 
+input.toggle + label::after {
+  content: "▸";
+}
+
+input.toggle:checked + label::after {
+  content: "▾";
+}
+
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;

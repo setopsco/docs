@@ -2,6 +2,7 @@
 title: Documentation
 type: docs
 url: /
+aliases: [/latest/]
 cascade:
   type: docs
 bookToC: false

@@ -53,8 +53,8 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    We need to create a [Volume]({{< relref "/latest/user/configuration/services#volume" >}}) for the data and link it to the App `<APPNAME>`.
 
    ```shell
-   setops -p codeserver -s staging service:create volume --type volume
-   setops -p codeserver -s staging --app web link:create volume --path /home/workspace
+   setops -p <PROJECT> -s <STAGE> service:create volume --type volume
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create volume --path /home/workspace
    ```
 
 1. Commit your [Changeset]({{< relref "/latest/user/configuration/changesets" >}}).

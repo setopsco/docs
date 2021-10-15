@@ -32,7 +32,7 @@ Before an image can be pushed to the Docker registry, you must create the App, a
 1. Log into the registry with your Docker CLI.
 
    ```shell
-   printf YOURTOKEN | docker login -u setops --password-stdin zweitag.setops.net
+   printf YOURTOKEN | docker login -u setops --password-stdin try.setops.net
    ```
 
    (this comes from `setops registry:login`)
@@ -44,7 +44,7 @@ Before an image can be pushed to the Docker registry, you must create the App, a
 1. Tag your local image with the registry URL. The URL follows the format `REGISTRY_URL/<PROJECT>/<STAGE>/<APPNAME>:TAG`.
 
    ```shell
-   docker tag YOURIMAGE:latest zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag YOURIMAGE:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    `latest` is the image tag to use at the SetOps Docker Registry. The value is not relevant to SetOps as you will use the image digest to identify the image for App Deployment. It may be practical to use Git commit SHAs for you to identify images, for example.
@@ -52,7 +52,7 @@ Before an image can be pushed to the Docker registry, you must create the App, a
 1. Push the image to the SetOps Docker Registry.
 
    ```shell
-   docker push zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
    ```
    The push refers to repository [api.setops.co/<PROJECT>/<STAGE>/<APPNAME>]

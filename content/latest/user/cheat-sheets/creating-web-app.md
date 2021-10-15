@@ -65,8 +65,8 @@ setops -p <PROJECT> -s <STAGE> changeset:commit
 First, you need to build a docker image for your application. Then push it to the SetOps docker image registry. Look at best practices for [building an Image]({{< relref "/latest/user/best-practices/build-image" >}})
 ```shell
 setops registry:login
-docker tag [MYAPP] zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-docker push zweitag.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+docker tag [MYAPP] try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:[...]
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
 setops -p <PROJECT> -s <STAGE> changeset:commit
@@ -79,7 +79,7 @@ setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
 ## Check Health Status
 If `RUNNING` & `HEALTHY` :white_check_mark: Now you can open the website at:
 `https://<APPNAME>.<STAGE>.<PROJECT>.$YOURDOMAIN/`
-e.g. `https://web.staging.myproject.zweitagapps.net/`
+e.g. `https://web.staging.myproject.setopsapps.net/`
 
 ## Logs
 ```shell

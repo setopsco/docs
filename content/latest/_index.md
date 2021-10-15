@@ -31,3 +31,5 @@ Being paged in the middle of the night because your app server is suffering a ca
 When you first think about it, app deployment sounds easy: start a bunch of containers and your app is ready to be used. But then you’ll think about reliability, debugging, monitoring, TLS certificates, and backup and it soon becomes more complicated. SetOps includes all necessary bolts to run apps in production and be proud of it.
 
 {{< /columns >}}
+
+This is my awesome change.

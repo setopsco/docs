@@ -160,7 +160,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
       Run `rake db:schema:load db:seed` to load the database schema and populate it with seed data:
 
       ```shell
-      setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:schema:load db:seed
+      setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
       ```
 
 12. Open the application in your browser.
@@ -215,7 +215,7 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create <SHA FROM PUSH>
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
    setops -p <PROJECT> -s <STAGE> changeset:commit
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:schema:load db:seed
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
    ```
 
    ### Destroy Stage & Project

@@ -334,6 +334,17 @@ When this is done, the `<APPNAME>` App will be deployed with the Environment Var
 S3_DATA_URL=s3://ACCESS_KEY_URL_ENCODED:SECRET_KEY_URL_ENCODED@bucket-name?region=eu-central-1&endpoint=https%3A%2F%2Fs3.eu-central-1.amazonaws.com
 ```
 
+{{< hint notice >}}
+The AWS Access Key ID (the *username*), and the AWS Secret Access Key (the *password*) are URI-encoded because they may contain special characters. Make sure to decode them in your app.
+
+In Ruby this can be done with `CGI.unescape`:
+
+```ruby
+s3_url = URI.parse(ENV['S3_DATA_URL'])
+secret_access_key = CGI.unescape(s3_url.password)
+```
+{{< /hint >}}
+
 #### Delete a S3 Bucket
 
 Finally, you can delete a S3 Service:

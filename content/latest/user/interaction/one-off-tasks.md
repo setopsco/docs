@@ -125,9 +125,9 @@ You can use any link to connect to the task.
 
 {{< hint warning >}}
 **The tmate session will continue running until you stop it manually.**
-When you're finished, do not forget to stop the task.
+When you're finished, do not forget to stop the task with it's task ID.
 ```shell
-tmate kill-server
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:stop ID
 ```
 {{</ hint >}}
 

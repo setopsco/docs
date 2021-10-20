@@ -216,6 +216,10 @@ The other 4 parameters are optional and defaults are used as shown above if ommi
 To configure the container healtcheck, use `container:set health-check --interval INTERVAL --timeout TIMEOUT --retries RETRIES --start-period STARTPERIOD -- COMMAND`.
 
 For an App with Protocol `http`, you could use `curl` (or `wget`) to verify the app server is running correctly:
+```shell
+setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check -- /bin/sh -c "curl -s http://localhost:5000/healthz | grep pong"
+```
+Or with its optional parameters:
 
 ```shell
 setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c "curl -s http://localhost:5000/healthz | grep pong"
@@ -232,7 +236,7 @@ Healtcheck:
 For an App with Protocol `tcp`, you could use `nc` (netcat) to verify the app server is running. Note this only checks whether the port is open, not if the app is doing something useful.
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set  health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c "echo '' | nc localhost 5000"
+setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set  health-check -- /bin/sh -c "echo '' | nc localhost 5000"
 ```
 ```
 Healtcheck:

@@ -35,7 +35,7 @@ container                                         # list/show command (container
 container:set command "/bin/bash"
 container:set command -- sh -c "cd /srv; ./go.sh" # example with shell escaping; also see hint
 container:set entrypoint -- "/docker-entrypoint.sh"
-container:set health-check --interval 30 --timeout 15 --retries 3 --start-period 15 -- curl -l http://localhost
+container:set health-check -- curl -l http://localhost
 container:unset command|entrypoint|health-check    # sets option back to default value
 ```
 
@@ -100,7 +100,7 @@ scoped: `-p <PROJECT> -s <STAGE> --app <APPNAME>`
 ```shell
 release                            # list all releases
 release:create sha256:ba2cc...     # returns automatic generated id
-release:activate {id}
+release:activate ID
 ```
 
 ### Logs

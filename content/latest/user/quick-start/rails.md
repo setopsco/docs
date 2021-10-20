@@ -73,8 +73,11 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    Let's also configure a [container Health Check]({{< relref "/latest/user/configuration/apps#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
 
    ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
    ```
+   {{< hint info >}}
+   The Health Check command must be installed within the App's Docker image. For example, when using `sh` and `curl` for the Health Check command, make sure the `curl` binary and a `shell` is present in the image. In case the container is not `HEALTHY`, check the logs and test your image.
+   {{< /hint >}}
 
    The Health Check path deviates from the default path (`/`), so you need to adjust the [network Health Check]({{< relref "/latest/user/configuration/apps#network-health-check" >}}) as well.
 
@@ -194,7 +197,7 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 512
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/.well-known/health-check'
    setops -p <PROJECT> -s <STAGE> service:create database --type postgresql11 --plan shared
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create database --env-key DATABASE_URL

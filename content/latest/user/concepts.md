@@ -4,7 +4,11 @@ bookToC: false
 ---
 # Concepts
 
-The most important concepts you need to know about to use SetOps efficiently are **Project**, **Stages**, **Apps**, **Services** and **Changesets** and it's CLI.
+The most important concepts you need to know about to use SetOps efficiently are **Organizations**, **Project**, **Stages**, **Apps**, **Services** and **Changesets** and it's CLI.
+
+## Organization
+
+An **Organization** is the topmost orgranizational entity in SetOps. It can host multiple Projects and is bound to an AWS account.
 
 ## Project
 

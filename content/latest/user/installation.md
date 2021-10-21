@@ -79,7 +79,7 @@ the invitation email to sign up:
 
 ```
 $ setops signup
-Enter client name: mycompany
+Enter organization name: myorg
 Enter username: your.name@example.com
 Enter activation code: <enter activation code>
 Enter a new password: <enter password>
@@ -98,7 +98,7 @@ To log into your account, run `setops login`:
 
 ```
 $ setops login
-Enter client name: mycompany
+Enter organization name: myorg
 Enter username: your.name@example.com
 Enter password: <enter password>
 ✅ logged in as "your.name@example.com"

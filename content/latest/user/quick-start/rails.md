@@ -132,8 +132,8 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    Next, push the Docker image to the registry:
 
    ```shell
-   docker tag sample-app:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag sample-app:latest try.setops.net/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push try.setops.net/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    ```
@@ -206,8 +206,8 @@ If you don’t want explanations for all the commands, you can use these snippet
 
    ### Push App to SetOps Registry
    ```shell
-   docker tag sample-app:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag sample-app:latest try.setops.net/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push try.setops.net/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    ### Deploy App

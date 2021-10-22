@@ -361,7 +361,7 @@ If you accidentally deleted the service, please reach out to us as we *MAY* be a
 
 ### Redis {id=redis6}
 
-The `redis6` Service provides a [Redis](https://redis.io/) instance. The `plan` value can be set to any valid [ElastiCache for Redis Node Type](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html), but `cache.t2.micro` is a sensible default. All `redis6` service instances run Redis v6. The Service is linked [with environment variables](#link-env).
+The `redis6` Service provides a [Redis](https://redis.io/) instance. The `plan` value can be set to any valid [ElastiCache for Redis Node Type](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html), but `cache.t3.micro` is a sensible default. All `redis6` service instances run Redis v6. The Service is linked [with environment variables](#link-env).
 
 SetOps will create a dedicated Redis instance for the service and authorize your user for access to that instance. Note that your App will need to use the [`AUTH` command](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html) when it connects to the instance.
 
@@ -372,7 +372,7 @@ SetOps will create a dedicated Redis instance for the service and authorize your
 To create a Redis instance, first create the Service:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> service:create queue --type redis6 --plan cache.t2.micro
+setops -p <PROJECT> -s <STAGE> service:create queue --type redis6 --plan cache.t3.micro
 ```
 
 #### Link Service to App

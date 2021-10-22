@@ -21,7 +21,6 @@ pack build [MYAPP] --builder heroku/buildpacks:18 --env-file=".env.build"
 We came up with a certain set of required _ENVs_  in our applications. You have to check whether your app has the same _ENVs_ or uses the same logic.
 
 ```env
-# myproject/.env.build
 DATABASE_URL=postgres:///
 DATABASE_URL_WITHOUT_DB_NAME=postgres:///
 RAILS_ENV=staging

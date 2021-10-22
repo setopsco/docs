@@ -28,7 +28,7 @@ setops -p <PROJECT> -s <STAGE> changeset:commit
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set entrypoint launcher
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- bundle exec puma --config config/puma.rb
-setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c 'curl -s http://localhost:5000/.well-known/health-check | grep ok'
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check -- /bin/sh -c 'curl -s http://localhost:5000/.well-known/health-check | grep ok'
 setops -p <PROJECT> -s <STAGE> changeset:commit
 ```
 ## Check status
@@ -95,9 +95,10 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- bundle exec rake db:m
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- tmate -F
 ```
 
-## Get S3 Data URL from App {id=get-s3-url}
+## Get S3 Data- & Database URL from App {id=get-env}
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- printenv | grep S3_DATA_URL
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- printenv | grep DATABASE_URL
 ```
 
 ## Upload Database & S3 Data

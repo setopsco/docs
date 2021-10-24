@@ -47,6 +47,7 @@ A `ServiceError` has the following schema:
 - `ServiceDoesNotExist` - failure to provide an existing service name
 - `ServiceAlreadyExists` - failure to provide a service name that does not already exist
 - `ServiceNameInvalid` - failure to provide a valid service name
+- `NotificationNameInvalid` - failure to provide a valid notification name
 - `ChangesetDoesNotExist` – failure to request an operation on a non-existing changeset
 - `ChangesetInvalid` – failure to validate the changeset, see field `validation_errors` for an explanation
 - `CommitFailed` – failure to commit the changeset

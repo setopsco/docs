@@ -1,16 +1,18 @@
 (function () {
   document.getElementById('book-search-input').removeAttribute("data-hotkeys");
 
+  let organization = "<ORGANIZATION>"
   let project = "<PROJECT>"
   let stage = "<STAGE>"
   let app = "<APPNAME>"
+  const orgInput = document.getElementsByName('organization');
   const projectInput = document.getElementsByName('project');
   const stageInput = document.getElementsByName('stage');
   const appInput = document.getElementsByName('app');
   const aliasSwitch = document.getElementsByName('aliasSwitch');
   const changeButton = document.getElementsByName('changeButton');
   const resetButton = document.getElementsByName('reset');
-  const form = [projectInput, stageInput, appInput];
+  const form = [orgInput, projectInput, stageInput, appInput];
   const bannedWords = ["setops", "project", "stage", "app"]
 
   if (projectInput.length > 0) {
@@ -56,6 +58,26 @@
   }
 
   function identifyFormFields(tag) {
+    // identify project field
+    orgInput.forEach(el => {
+      if (el.value && el.value.match(/^ *$/) == null && !bannedWords.includes(el.value)) {
+        if (tag.closest(".book-header") && el.closest(".book-header")) {
+          orgVal = el.value;
+          orgStore = true;
+          return false;
+        } else {
+          orgVal = el.value;
+          orgStore = true;
+          return true;
+        }
+      } else {
+        el.value = "";
+        orgVal = "<ORGANIZATION>";
+        orgStore = false;
+        return true;
+      }
+    });
+
     // identify project field
     projectInput.forEach(el => {
       if (el.value && el.value.match(/^ *$/) == null && !bannedWords.includes(el.value)) {
@@ -139,6 +161,11 @@
 
   function replaceCommands(tag) {
     identifyFormFields(tag);
+    if (orgVal) {
+      replaceOnDocument(organization, orgVal);
+      organization = orgVal;
+      setLocalStorage("SetOpsOrganization", orgVal, orgStore);
+    }
     if (projectVal) {
       replaceOnDocument(project, projectVal);
       project = projectVal;
@@ -184,6 +211,12 @@
     }
   }
 
+  // set value from local storage for organization
+  if (localStorage.getItem("SetOpsOrganization")) {
+    orgInput.forEach(el => {
+      el.value = localStorage.getItem("SetOpsOrganization");
+    })
+  }
   // set value from local storage for project
   if (localStorage.getItem("SetOpsProject")) {
     projectInput.forEach(el => {

@@ -4,11 +4,11 @@ bookToC: false
 ---
 # Concepts
 
-The most important concepts you need to know about to use SetOps efficiently are **Organizations**, **Project**, **Stages**, **Apps**, **Services** and **Changesets** and it's CLI.
+The most important concepts you need to know about to use SetOps efficiently are **Organizations**, **Projects**, **Stages**, **Apps**, **Services**, **Changesets**, and its CLI.
 
 ## Organization
 
-An **Organization** is the topmost orgranizational entity in SetOps. It can host multiple Projects and is bound to an AWS account.
+An **Organization** is the topmost organizational entity in SetOps. It can host multiple Projects and is bound to an AWS account.
 
 ## Project
 
@@ -22,28 +22,29 @@ A **Stage** a self-contained deployment environment. It is tied to a project and
 
 An **App** is a task that the SetOps platform runs. A stage may have many apps. Apps are always assumed
 to be long-running. They run on our container-based platform using an image you provide. For example, web applications
-will usually have a task named `web` for the application server, and possibly a task named `job` for running background jobs. Apps are assumed to be stateless. They persist user data by accessing services.
+will usually have a task named `web` for the application server and possibly a task called `job` for running background jobs. Apps are assumed to be stateless. They persist user data by accessing services.
 
 ## Service
 
-A **Service** is an additional component such as databases for example. Services provide additional functionality and can be linked to apps that consume them.
+A **Service** is an additional component such as databases, for example. Services provide additional functionality and can be linked to apps that consume them.
 
 ## Changeset
 
-A **Changeset** is a set of commands which change a stage. The SetOps workflow for changing anything on a stage works always the same: you add a set of commands to your changeset and commit it to make your change live (or you discard the changeset). Changesets work just like the Git staging area in your local repository: you add some files, then you commit.
+A **Changeset** is a set of commands which change a stage. The SetOps workflow for changing anything on a stage always works the same: you add a set of commands to your changeset and commit it to make your change live (or discard the changeset). Changesets work just like the Git staging area in your local repository: you add some files, then you commit.
 
-Changesets are stored on the server per stage and per user. So a user can log in from multiple computers and edit the stored changeset as well as commit or discard it.
+Changesets are stored on the server per stage and user. So a user can log in from multiple computers and edit the stored changeset and commit or discard it.
+
 
 ## Example
 
 ![SetOps Concepts Example](concepts.png)
 
-In this example, there is a Stage with one App _web_ and two Services, _database_ and _store_. Let's say we want to create another App. This is done with a Changeset which, in this case, contains a Command to create the App and set its Scale to _2_. When the Changeset is committed, the Stage has the two Apps _web_ and _worker_ with the Services _database_ and _store_.
+In this example, there is a Stage with one App _web_ and two Services, _database_, and _store_. Let's say we want to create another App. This is done with a Changeset that contains a Command to create the App and set its Scale to _2_. When the Changeset is committed, the Stage has the two Apps _web_ and _worker_ with the Services _database_ and _store_.
 
 
 ## CLI
 
-The commandline interface (CLI) is the heart of SetOps. You can create, configure, deploy and manage your application with this single tool. The CLI commands follow a consistent and intuitive pattern.
+The Command Line Interface (CLI) is the heart of SetOps. You can create, configure, deploy and manage your application with this single tool. The CLI commands follow a consistent and intuitive pattern.
 
 There are:
 
@@ -96,7 +97,7 @@ The CLI nests every lower-level command with a scope flag. For example, let's ta
 setops --project myproject --stage production --app web container:set ARGUMENT
 ```
 
-You can set all flags either in front or after the command; for a better readability of our documentation, we place scope flags at the start of the command.
+You can set all flags either in front or after the command; for better readability of our documentation, we place scope flags at the start of the command.
 
 This is a list of common subcommands:
 

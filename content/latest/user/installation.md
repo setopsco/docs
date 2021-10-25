@@ -74,7 +74,7 @@ configure your app environment, deploy, and monitor your app.
 
 ## Sign up
 
-If you've been invited to SetOps by another user use the activation code from
+If you've been invited to SetOps by another user, use the activation code from
 the invitation email to sign up:
 
 ```
@@ -88,9 +88,8 @@ Enter the new password again: <enter password>
 ✅ logged in as "your.name@example.com"
 ```
 
-If you've just created a new SetOps account you will receive an email with your client
-name and an initial username and password. You can use those credentials to log
-into SetOps as described below.
+If you've already created a SetOps account, you can log in with your organization
+name, username, and password.
 
 ## Log In
 

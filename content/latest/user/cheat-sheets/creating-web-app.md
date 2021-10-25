@@ -65,8 +65,8 @@ setops -p <PROJECT> -s <STAGE> changeset:commit
 First, you need to build a docker image for your application. Then push it to the SetOps docker image registry. Look at best practices for [building an Image]({{< relref "/latest/user/best-practices/build-image" >}})
 ```shell
 setops registry:login
-docker tag [MYAPP] try.setops.net/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-docker push try.setops.net/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+docker tag [MYAPP] api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:[...]
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
 setops -p <PROJECT> -s <STAGE> changeset:commit

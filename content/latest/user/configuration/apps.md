@@ -112,9 +112,9 @@ Protocol:   http
 Private:    false
 Healtcheck:
 -- Command:         [curl -f http://localhost]
--- Interval:        30
--- Timeout:         15
--- Retries:         3
+-- Interval:         5
+-- Timeout:          5
+-- Retries:         10
 -- Start Period:    15
 Resources:
 -- CPU:      256
@@ -206,9 +206,9 @@ The Container Healtcheck is **optional** (off by default), but highly recommende
 | Parameter | Valid Values | Default | Description |
 |---|---|---|---|
 | `command`  | any command, e.g. `["/bin/sh", "-c", "curl -s http://localhost:5000/healthz \| grep pong"]` | - | Specifies the command that is used to determine the App's health. |
-| `interval`  | 1-30 | 30 | Determines the interval in which the App's health is checked in seconds.  |
-| `timeout`  | 1-30 | 15 | Specifies the time in seconds the App has to respond in.  |
-|  `retries`  | 1-30 | 3 | Configures the number of retries the healtcheck will attempt before declaring the App not healthy.  |
+| `interval`  | 1-30 | 5 | Determines the interval in which the App's health is checked in seconds.  |
+| `timeout`  | 1-30 | 5 | Specifies the time in seconds the App has to respond in.  |
+|  `retries`  | 1-30 | 1O | Configures the number of retries the healtcheck will attempt before declaring the App not healthy.  |
 | `start-period`  | 0-60 | 15 | Defines when the healtcheck is attempted for the first time after starting the App.  |
 
 The other 4 parameters are optional and defaults are used as shown above if ommited.
@@ -222,7 +222,7 @@ setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check -- /b
 Or with its optional parameters:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 5 -- /bin/sh -c "curl -s http://localhost:5000/healthz | grep pong"
+setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 15 -- /bin/sh -c "curl -s http://localhost:5000/healthz | grep pong"
 ```
 ```
 Healtcheck:
@@ -230,7 +230,7 @@ Healtcheck:
 -- Interval:        5
 -- Timeout:         5
 -- Retries:         10
--- Start Period:    5
+-- Start Period:    15
 ```
 
 For an App with Protocol `tcp`, you could use `nc` (netcat) to verify the app server is running. Note this only checks whether the port is open, not if the app is doing something useful.
@@ -244,7 +244,7 @@ Healtcheck:
 -- Interval:        5
 -- Timeout:         5
 -- Retries:         10
--- Start Period:    5
+-- Start Period:    15
 ```
 
 An existing container healtcheck configuration can be overwritten by running the command again with different parameters.

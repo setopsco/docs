@@ -611,7 +611,7 @@ For a Custom Domain Record, there is a default record type and an optional alter
 In order to create a Custom Domain, run `domain:create DOMAIN [--primary]`:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain setops.co --primary
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain:create setops.co --primary
 ```
 ```
 +-----------+---------+-----------+

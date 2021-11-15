@@ -34,7 +34,7 @@ We currently support the Service types described in the table below. Refer to th
 
 | Type | Plan(s) | Options | Link |
 |------|---------|---------|-------|
-| [`postgresql11`]({{< relref "#postgresql" >}}) | `shared` | [`extensions`]({{< relref "#postgresql-extensions" >}}) | Environment Variable |
+| [`postgresql11`]({{< relref "#postgresql" >}}) | `shared` or [RDS PostgreSQL node type](https://aws.amazon.com/de/rds/postgresql/pricing/) | [`extensions`]({{< relref "#postgresql-extensions" >}}) | Environment Variable |
 | [`postgresql13`]({{< relref "#postgresql" >}}) | [RDS PostgreSQL node type](https://aws.amazon.com/de/rds/postgresql/pricing/) | [`extensions`]({{< relref "#postgresql-extensions" >}}), [`min_storage`, `max_storage`]({{< relref "#postgresql-storage" >}}) | Environment Variable |
 | [`s3`]({{< relref "#s3" >}}) | not required | `blockPublicAccess` | Environment Variable |
 | [`redis6`]({{< relref "#redis6" >}}) | [ElastiCache for Redis Node Type](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html) | None | Environment Variable |
@@ -192,7 +192,7 @@ Your database user will own the database and all objects within the database.
 
 With the `shared` plan (only supported for type `postgresql11`), this database is provisioned in a database cluster shared between Apps. All databases are created with a unique database user to ensure data separation. Using the `shared` plan is a cost-efficient way to add a database to an App.
 
-If you require a dedicated database instance for complience, performance or reliability, the plan value can be set to any valid [RDS PostgreSQL node type](https://aws.amazon.com/elasticsearch-service/pricing/) when using type `postgresql13`. `db.t3.micro` is a sensible default for small workloads. To enable the _Multi-AZ_ feature, which keeps a hot standby instance in a second availability zones for higher reliability, add `.ha` at the end of the node type: e.g. `db.t3.micro.ha` for the _Multi-AZ_ version of `db.t3.micro`. Using plans with `.ha` doubles the cost of the database instance.
+If you require a dedicated database instance for complience, performance or reliability, the plan value can be set to any valid [RDS PostgreSQL node type](https://aws.amazon.com/elasticsearch-service/pricing/). `db.t3.micro` is a sensible default for small workloads. To enable the _Multi-AZ_ feature, which keeps a hot standby instance in a second availability zones for higher reliability, add `.ha` at the end of the node type: e.g. `db.t3.micro.ha` for the _Multi-AZ_ version of `db.t3.micro`. Using plans with `.ha` doubles the cost of the database instance.
 
 #### Create a database
 

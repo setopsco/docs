@@ -34,7 +34,7 @@ We currently support the Service types described in the table below. Refer to th
 
 | Type | Plan(s) | Options | Link |
 |------|---------|---------|-------|
-| [`postgresql11`]({{< relref "#postgresql" >}}) | `shared` or [RDS PostgreSQL node type](https://aws.amazon.com/de/rds/postgresql/pricing/) | [`extensions`]({{< relref "#postgresql-extensions" >}}) | Environment Variable |
+| [`postgresql11`]({{< relref "#postgresql" >}}) | `shared` | [`extensions`]({{< relref "#postgresql-extensions" >}}) | Environment Variable |
 | [`postgresql13`]({{< relref "#postgresql" >}}) | [RDS PostgreSQL node type](https://aws.amazon.com/de/rds/postgresql/pricing/) | [`extensions`]({{< relref "#postgresql-extensions" >}}), [`min_storage`, `max_storage`]({{< relref "#postgresql-storage" >}}) | Environment Variable |
 | [`s3`]({{< relref "#s3" >}}) | not required | `blockPublicAccess` | Environment Variable |
 | [`redis6`]({{< relref "#redis6" >}}) | [ElastiCache for Redis Node Type](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html) | None | Environment Variable |

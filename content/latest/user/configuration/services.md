@@ -614,7 +614,7 @@ mongodb://username:password@somehost.eu-central-1.docdb.amazonaws.com:27017/?ssl
 ```
 
 {{< hint info >}}
-ENV keys must comply with the following naming conventions. A key must consist only of letters (a-z, A-Z), numbers (0-9) and underscores (_), starting with a letter, a total length of 1 to 256 characters and none of the reserved keywords (APP_ENV_ID, PORT, PROTOCOL).
+ENV keys must comply with the following naming conventions. A key must consist only of letters (a-z, A-Z), numbers (0-9) and underscores (_), starting with a letter or underscore, a total length of 1 to 256 characters and none of the reserved keywords (APP_ENV_ID, PORT, PROTOCOL).
 {{< /hint >}}
 
 Your App needs to authenticate itself with the credentials from the Environment Variable.

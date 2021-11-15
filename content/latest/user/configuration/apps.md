@@ -495,6 +495,10 @@ A new Environment Variable can be defined for an existing App by executing
 `env:set ENVKEY=ENVVALUE [--description "ENVDESCRIPTION"]`. The parameter `description`
 is optional and can be used to provide a short description of the Environemnt Variable and/or its effect on the App.
 
+{{< hint info >}}
+ENV keys must comply with the following naming conventions. A key must consist only of letters (a-z, A-Z), numbers (0-9) and underscores (_), starting with a letter, a total length of 1 to 256 characters and none of the reserved keywords (APP_ENV_ID, PORT, PROTOCOL).
+{{< /hint >}}
+
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set RACK_ENV=production --description "The Rack environment variable"
 ```

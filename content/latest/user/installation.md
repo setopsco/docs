@@ -105,6 +105,10 @@ Enter password: <enter password>
 
 You are now ready to use the SetOps CLI.
 
+## Organizations
+
+After successful login, your session is linked to the Organization you logged into. If you are a member of multiple Organizations and want to switch between them you can do so by logging out via `setops logout`. Then you can login to other Organization using `setops login`.
+
 ## Going further
 
 [Read more about the concepts]({{< relref "/latest/user/concepts" >}}) which power SetOps.

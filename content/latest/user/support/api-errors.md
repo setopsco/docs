@@ -36,6 +36,8 @@ A `ServiceError` has the following schema:
 - `SessionInvalid` – failure to provide valid session credentials
 - `CredentialsInvalid` – failure to provide valid user credentials
 - `ValidationFailed` – failure to provide valid input values
+- `CodeOrganizationDoesNotExist` – failure to provide an existing organization name
+- `CodeOrganizationAlreadyExists` – failure to provide an organization name that does not already exist
 - `StageDoesNotExist` – failure to provide an existing stage name
 - `StageAlreadyExists` – failure to provide a stage name that does not already exist
 - `StageNameInvalid` - failure to provide a valid stage name

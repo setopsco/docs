@@ -74,12 +74,12 @@ configure your app environment, deploy, and monitor your app.
 
 ## Sign up
 
-If you've been invited to SetOps by another user use the activation code from
+If you've been invited to SetOps by another user, use the activation code from
 the invitation email to sign up:
 
 ```
 $ setops signup
-Enter client name: mycompany
+Enter organization name: myorg
 Enter username: your.name@example.com
 Enter activation code: <enter activation code>
 Enter a new password: <enter password>
@@ -88,9 +88,8 @@ Enter the new password again: <enter password>
 ✅ logged in as "your.name@example.com"
 ```
 
-If you've just created a new SetOps account you will receive an email with your client
-name and an initial username and password. You can use those credentials to log
-into SetOps as described below.
+If you've already created a SetOps account, you can log in with your organization
+name, username, and password.
 
 ## Log In
 
@@ -98,13 +97,17 @@ To log into your account, run `setops login`:
 
 ```
 $ setops login
-Enter client name: mycompany
+Enter organization name: myorg
 Enter username: your.name@example.com
 Enter password: <enter password>
 ✅ logged in as "your.name@example.com"
 ```
 
 You are now ready to use the SetOps CLI.
+
+## Organizations
+
+After successful login, your session is linked to the Organization you logged into. If you are a member of multiple Organizations and want to switch between them you can do so by logging out via `setops logout`. Then you can login to other Organization using `setops login`.
 
 ## Going further
 

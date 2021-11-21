@@ -100,15 +100,15 @@ You need to build an image of the application to deploy it with SetOps. We use t
    [...]
    Run the following command to log into the Docker registry:
 
-   printf YOURTOKEN | docker login -u setops --password-stdin try.setops.net
+   printf YOURTOKEN | docker login -u setops --password-stdin api.setops.co
    [...]
    ```
 
    Next, push the Docker image to the registry:
 
    ```shell
-   docker tag hasura/graphql-engine:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag hasura/graphql-engine:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    ```
@@ -165,8 +165,8 @@ If you don’t want explanations for all the commands, you can use these snippet
    ### Push App to SetOps Registry
    ```shell
    docker pull hasura/graphql-engine:latest
-   docker tag hasura/graphql-engine:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag hasura/graphql-engine:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    ### Deploy App

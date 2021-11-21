@@ -5,7 +5,7 @@ weight: 10
 
 This guide describes how to deploy an App with SetOps.
 
-Apps run in Docker containers based on images stored in a Docker registry. We provide this registry for you. In the following, we assume that there is a Project `<PROJECT>` and a Stage `<STAGE>` with an App named `<APPNAME>`.
+Apps run in Docker containers based on images stored in a Docker registry. We provide this registry for you. In the following, we assume that there is an Organization `<ORGANIZATION>`, a Project `<PROJECT>` and a Stage `<STAGE>` with an App named `<APPNAME>`.
 
 Refer to the [Stages]({{< relref "/latest/user/configuration/stages" >}}) and [Apps]({{< relref "/latest/user/configuration/apps" >}}) Guides for instructions on how to create those.
 
@@ -32,7 +32,7 @@ Before an image can be pushed to the Docker registry, you must create the App, a
 1. Log into the registry with your Docker CLI.
 
    ```shell
-   printf YOURTOKEN | docker login -u setops --password-stdin try.setops.net
+   printf YOURTOKEN | docker login -u setops --password-stdin api.setops.co
    ```
 
    (this comes from `setops registry:login`)
@@ -41,10 +41,10 @@ Before an image can be pushed to the Docker registry, you must create the App, a
    Use `setops registry:login -o plain` to get the `docker login` command without the instructions. This may be useful in CI pipelines, for example.
    {{< /hint >}}
 
-1. Tag your local image with the registry URL. The URL follows the format `REGISTRY_URL/<PROJECT>/<STAGE>/<APPNAME>:TAG`.
+1. Tag your local image with the registry URL. The URL follows the format `api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:TAG`.
 
    ```shell
-   docker tag YOURIMAGE:latest try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker tag YOURIMAGE:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
 
    `latest` is the image tag to use at the SetOps Docker Registry. The value is not relevant to SetOps as you will use the image digest to identify the image for App Deployment. It may be practical to use Git commit SHAs for you to identify images, for example.
@@ -52,10 +52,10 @@ Before an image can be pushed to the Docker registry, you must create the App, a
 1. Push the image to the SetOps Docker Registry.
 
    ```shell
-   docker push try.setops.net/<PROJECT>/<STAGE>/<APPNAME>:latest
+   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    ```
    ```
-   The push refers to repository [api.setops.co/<PROJECT>/<STAGE>/<APPNAME>]
+   The push refers to repository [api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>]
    [...]
    web_1: digest: sha256:2b51cdaabcdc9c35b36e998ec81d2ed8507def0e4709a4d5003414e727e67fa9 size: 1993
    ```

@@ -101,12 +101,14 @@ input:checked + .slider:before {
   transform: translateX(18px);
 }
 
-input.toggle + label::after {
-  content: "▸";
-}
+.book-menu {
+  input.toggle + label::after {
+    content: "▸";
+  }
 
-input.toggle:checked + label::after {
-  content: "▾";
+  input.toggle:checked + label::after {
+    content: "▾";
+  }
 }
 
 /* Rounded sliders */

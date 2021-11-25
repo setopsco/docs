@@ -196,8 +196,8 @@ Size:         150.8 kB
 
 | Service Type | Backup Format | Notes |
 |--------------|---------------|-------|
-| `postgresql11` | PostgreSQL Custom | Custom-format archive created by `pg_dump`. See [PostgreSQL docs](https://www.postgresql.org/docs/11/app-pgdump.html). |
-| `postgresql13` | PostgreSQL Custom | Custom-format archive created by `pg_dump`. See [PostgreSQL docs](https://www.postgresql.org/docs/13/app-pgdump.html). |
+| `postgresql11` | PostgreSQL Custom | Archive with format `custom` created by `pg_dump`. See [PostgreSQL docs](https://www.postgresql.org/docs/11/app-pgdump.html). |
+| `postgresql13` | PostgreSQL Custom | Archive with format `custom` created by `pg_dump`. See [PostgreSQL docs](https://www.postgresql.org/docs/13/app-pgdump.html). |
 | `s3` | .tar.gz Archive | Gzipped TAR archive with S3 bucket contents at the root level. Create the archive with `tar czf`.|
 | `redis6` | RDB (Redis Database) | See [Redis docs](https://redis.io/topics/persistence). |
 | `volume` | .tar.gz Archive | Gzipped TAR archive with volume contents at the root level. |

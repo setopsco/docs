@@ -75,12 +75,11 @@ env:unset KEY
 scoped: `-p <PROJECT> -s <STAGE> --app <APPNAME>`
 ```shell
 domain                                         # list all domains for this app
-domain:create zwei.beer --primary              # short form for --primary true --static-ip true
+domain:create zwei.beer
 domain:destroy zwei.beer
 domain:validate zwei.beer
 --domain D option:set static-ip true
---domain D option:set primary true             # sets all other domains to primary false
---domain D option:unset static-ip|primary      # sets option back to default value
+--domain D option:unset static-ip              # sets option back to default value
 ```
 
 ### Task

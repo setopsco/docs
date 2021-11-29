@@ -32,7 +32,7 @@ A backup can be in one of three states:
 - `RESTORING`: the backup is currently being restored, it can't be deleted
 
 {{< hint info >}}
-💡 Note that [Scheduled Backups](/docs/latest/user/configuration/services#scheduled-backups) will not appear in this list as `CREATING`. They will rather show as `CREATED` once they are done.
+💡 Note that [Scheduled Backups]({{< relref "/latest/user/configuration/services#scheduled-backups" >}}) will not appear in this list as `CREATING`. They will rather show as `CREATED` once they are done.
 {{< /hint >}}
 
 ## Create a backup
@@ -50,7 +50,7 @@ Status:   CREATING
 Note that the backup can only be downloaded or restored when it has the status `CREATED`. Use `backup` to check that it is `CREATED`.
 
 {{< hint info >}}
-💡 You can configure SetOps to automatically create backups of the Service. Refer to [the Services section](/docs/latest/user/configuration/services#scheduled-backups) to learn more.
+💡 You can configure SetOps to automatically create backups of the Service. Refer to [the Services section]({{< relref "/latest/user/configuration/services#scheduled-backups" >}}) to learn more.
 {{< /hint >}}
 
 ## Restore a backup

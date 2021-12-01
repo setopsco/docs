@@ -78,8 +78,6 @@ domain                                         # list all domains for this app
 domain:create zwei.beer
 domain:destroy zwei.beer
 domain:validate zwei.beer
---domain D option:set static-ip true
---domain D option:unset static-ip              # sets option back to default value
 ```
 
 ### Task

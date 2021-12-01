@@ -708,7 +708,7 @@ In addition to the public custom domains described in the previous section, you 
 Just add a custom domain with the wildcard notation (`*.<your domain>`) like you would do with a single domain:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --app <APPNAME> '*.setops.co'
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain:create '*.setops.co'
 ```
 
 {{< hint warning >}}

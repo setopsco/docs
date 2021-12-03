@@ -70,6 +70,11 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 512
    ```
 
+   To get the Rails app started inside the container, we need to set a `command`:
+   ```shell
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- bundle exec puma
+   ```
+
    Let's also configure a [container Health Check]({{< relref "/latest/user/configuration/apps#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
 
    ```shell
@@ -197,6 +202,7 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 512
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- bundle exec puma
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/.well-known/health-check'
    setops -p <PROJECT> -s <STAGE> service:create database --type postgresql11 --plan shared

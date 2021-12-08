@@ -9,12 +9,12 @@ In this tutorial, you will deploy the sample application from Michael Hartl's bo
 
 ## Prepare your Code
 
-1. Get started by getting the code. The code is originally hosted at [_mhartl/sample_app_6th_ed_](https://github.com/mhartl/sample_app_6th_ed), but for convinience, we recommend using our fork at [_setopsco/sample_app_6th_ed_](https://github.com/setopsco/sample_app_6th_ed)
+1. Get started by getting the code. The code is originally hosted at [_mhartl/sample_app_6th_ed_](https://github.com/mhartl/sample_app_6th_ed), but for convinience, we recommend using our fork at [_setopsco/rails-sample-app_](https://github.com/setopsco/rails-sample-app)
 
    This will provide you with a verified version, and all necessary adjustments towards a [Twelve-Factor App](https://12factor.net) have already been made.
 
    ```shell
-   git clone https://github.com/setopsco/sample_app_6th_ed
+   git clone https://github.com/setopsco/rails-sample-app
    ```
 
 ## Build your Image
@@ -190,8 +190,8 @@ If you don’t want explanations for all the commands, you can use these snippet
    ### Build Image
    While building the image you can already start configuring the App.
    ```shell
-   git clone https://github.com/setopsco/sample_app_6th_ed
-   cd sample_app_6th_ed
+   git clone https://github.com/setopsco/rails-sample-app
+   cd rails-sample-app
    docker build --pull -t sample-app:latest .
    ```
    ### Configure App

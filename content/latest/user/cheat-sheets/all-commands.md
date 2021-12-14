@@ -58,7 +58,7 @@ network:set public true
 network:set port 5000
 network:set health-check-path "/.well-known/health-check"
 network:set health-check-status 200-499,501
-network:unset protocol|public|port|health-check-path|healtcheck-status
+network:unset protocol|public|port|health-check-path|health-check-status
 ```
 
 ### Environment Variables

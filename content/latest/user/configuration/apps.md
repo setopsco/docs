@@ -112,9 +112,9 @@ Protocol:   http
 Private:    false
 Health Check:
 -- Command:         [curl -f http://localhost]
--- Interval:         5
--- Timeout:          5
--- Retries:         10
+-- Interval:        10
+-- Timeout:         10
+-- Retries:          5
 -- Start Period:    15
 Resources:
 -- CPU:      256
@@ -206,9 +206,9 @@ The Container Health Check is **optional** (off by default), but highly recommen
 | Parameter | Valid Values | Default | Description |
 |---|---|---|---|
 | `command`  | any command, e.g. `["/bin/sh", "-c", "curl -s http://localhost:5000/healthz \| grep pong"]` | - | Specifies the command that is used to determine the App's health. |
-| `interval`  | 1-30 | 5 | Determines the interval in which the App's health is checked in seconds.  |
-| `timeout`  | 1-30 | 5 | Specifies the time in seconds the App has to respond in.  |
-|  `retries`  | 1-30 | 1O | Configures the number of retries the health check will attempt before declaring the App not healthy.  |
+| `interval`  | 1-30 | 10 | Determines the interval in which the App's health is checked in seconds.  |
+| `timeout`  | 1-30 | 10 | Specifies the time in seconds the App has to respond in.  |
+|  `retries`  | 1-30 | 5 | Configures the number of retries the health check will attempt before declaring the App not healthy.  |
 | `start-period`  | 0-60 | 15 | Defines when the health check is attempted for the first time after starting the App.  |
 
 The other 4 parameters are optional and defaults are used as shown above if ommited.
@@ -222,14 +222,14 @@ setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check -- /b
 Or with its optional parameters:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check --interval 5 --timeout 5 --retries 10 --start-period 15 -- /bin/sh -c "curl -s http://localhost:5000/healthz | grep pong"
+setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set health-check --interval 10 --timeout 10 --retries 5 --start-period 15 -- /bin/sh -c "curl -s http://localhost:5000/healthz | grep pong"
 ```
 ```
 Health Check:
 -- Command:         [/bin/sh -c curl -s http://localhost:5000/healthz | grep pong]
--- Interval:        5
--- Timeout:         5
--- Retries:         10
+-- Interval:        10
+-- Timeout:         10
+-- Retries:         5
 -- Start Period:    15
 ```
 
@@ -241,9 +241,9 @@ setops -p <PROJECT> -s <STAGE> --app  <APPNAME> container:set  health-check -- /
 ```
 Health Check:
 -- Command:         [/bin/sh -c echo '' | nc localhost 5000]
--- Interval:        5
--- Timeout:         5
--- Retries:         10
+-- Interval:        10
+-- Timeout:         10
+-- Retries:         5
 -- Start Period:    15
 ```
 

@@ -87,7 +87,6 @@ domain:validate zwei.beer
 scoped: `-p <PROJECT> -s <STAGE> --app <APPNAME>`
 ```shell
 task                               # list all tasks (running/exited)
-task:info ID
 task:run -- rails c                # interactive by default
 task:run --detach -- rake db:migrate
 task:run --interactive -- bash

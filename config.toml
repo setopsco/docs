@@ -25,9 +25,14 @@ disableKinds = ['taxonomyTerm']
   weight = 30
 
 [[menu.after]]
+name = "Community"
+url = "https://discord.com/invite/2jZsaP96Gs"
+weight = 40
+
+[[menu.after]]
   name = "Support"
   url = "mailto:support@setops.co"
-  weight = 40
+  weight = 50
 
 [params]
 BookSection = '/latest/user'

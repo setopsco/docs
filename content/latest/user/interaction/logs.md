@@ -67,6 +67,17 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> log --before 2020-09-11T12:00:00Z
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> log --after 2020-09-11T12:00:00Z
 ```
+The values of `--before` and `--after` can be specified in the following formats.
+```
+2006-01-02T15:04:05Z07:00  # with Z07:00 as specific timezone
+2006-01-02T15:04:05Z
+2006-01-02T15:04:05
+2006-01-02T15:04
+2006-01-02T15
+2006-01-02
+2006-01
+2006
+```
 You can filter the logs by the task ID if you provide `--task ID`. Use `app:ps <APPNAME>` to get the ID
 of currently running tasks.
 

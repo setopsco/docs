@@ -36,6 +36,10 @@ You can run detached background tasks with the `--detached` flag.
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run --detached -- echo "rake db:migrate"
 ```
+When running in a non-interactive environment e.g. a CI pipeline, you can use `--detach-timeout` to guarantee the CLI detaches from the output after the specified time. `--detach-timeout` can be specified in the format `10m` where `10` is the value and `m` the unit. Valid units are `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds) and `ns` or `us` (nanoseconds). Please note, that you cannot use `--detach-timeout` in combination with `--interactive`.
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run --detach-timeout 10m
+```
 
 Now you can see the list of all running tasks with the `task` command:
 ```shell
@@ -45,6 +49,7 @@ You can stop running tasks with the `task:stop` command.
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:stop ID
 ```
+
 ## Interactive one-off tasks with tmate {id=tmate}
 
 Interactive One-Off Tasks allow you to debug your application on SetOps, for example with a  [REPL console](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop).

@@ -15,11 +15,11 @@ To display log entries for your App, run `log`.
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> log
 ```
 ```
-2020-10-05 17:42:54 [app] Testlog
-2020-10-05 17:42:54 [app] Testlog
-2020-10-05 17:42:54 [app] Testlog
+2020-10-05 17:42:54 [output] Testlog
+2020-10-05 17:42:54 [output] Testlog
+2020-10-05 17:42:54 [output] Testlog
 [...]
-2020-10-05 17:42:54 [app] Testlog
+2020-10-05 17:42:54 [output] Testlog
 ```
 
 {{< hint warning >}}
@@ -43,29 +43,40 @@ If only `-f` is used, `n` will default to `250`.
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> log -n 2
 ```
 ```
-2020-10-05 17:42:54 [app] Testlog
-2020-10-05 17:42:54 [app] Testlog
+2020-10-05 17:42:54 [output] Testlog
+2020-10-05 17:42:54 [output] Testlog
 ```
-`-f` continously prints new log entries as their are created by your app:
+`-f` continously prints new log entries as they are created by your app:
 
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> log -f
 ```
 
-In addition to the number of printed entries, you can also configure the time period of log entries you are interested in. Use `--before 2020-09-11T12:00:00Z` and `--after 2020-09-11T12:00:00Z` to limit the range.
+In addition to the number of printed entries, you can also configure the time period of log entries you are interested in. Use `--before 2020-09-11T12:00:00Z` and `--after 2020-09-11T12:00:00Z` to limit the range. Please note, that the limits are exclusive. If you want to filter for all logs from 2021 for example, please use `--after 2020 --before 2022`.
 
 ```shell
 # --before prints log entries that occured before the given timestamp
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> log --before 2020-09-11T12:00:00Z
 ```
 ```
-2020-09-11 11:35:54 [app] Testlog
+2020-09-11 11:35:54 [output] Testlog
 [...]
-2020-09-11 11:58:44 [app] Testlog
-2020-09-11 11:59:37 [app] Testlog
+2020-09-11 11:58:44 [output] Testlog
+2020-09-11 11:59:37 [output] Testlog
 ```
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> log --after 2020-09-11T12:00:00Z
+```
+The values of `--before` and `--after` can be specified in the following formats:
+```
+2020-09-11T15:04:05+01:00  # with +01:00 as timezone
+2020-09-11T15:04:05Z
+2020-09-11T15:04:05
+2020-09-11T15:04
+2020-09-11T15
+2020-09-11
+2020-09
+2029
 ```
 You can filter the logs by the task ID if you provide `--task ID`. Use `app:ps <APPNAME>` to get the ID
 of currently running tasks.

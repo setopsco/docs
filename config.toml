@@ -10,29 +10,34 @@ disableKinds = ['taxonomyTerm']
 [menu]
 # [[menu.before]]
 [[menu.after]]
+  name = "Web App"
+  url = "https://app.setops.co"
+  weight = 10
+
+[[menu.after]]
   name = "Homepage"
   url = "https://www.setops.co"
-  weight = 10
+  weight = 20
 
 [[menu.after]]
   name = "GitHub"
   url = "https://github.com/setopsco"
-  weight = 20
+  weight = 30
 
 [[menu.after]]
   name = "API Reference"
   url = "/api/"
-  weight = 30
+  weight = 40
 
 [[menu.after]]
 name = "Community"
 url = "https://discord.com/invite/2jZsaP96Gs"
-weight = 40
+weight = 50
 
 [[menu.after]]
   name = "Support"
   url = "mailto:support@setops.co"
-  weight = 50
+  weight = 60
 
 [params]
 BookSection = '/latest/user'

@@ -43,7 +43,7 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
-   The default exposed [port]({{< relref "/latest/user/configuration/apps#public" >}}) of the Server is `3000`, so let's change it:
+   The default exposed [port]({{< relref "/latest/user/configuration/apps#port" >}}) of the Server is `3000`, so let's change it:
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    ```

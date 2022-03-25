@@ -43,7 +43,7 @@ In this tutorial, you will deploy your own [Hasura GraphQL Engine](https://githu
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
-   The default exposed [port]({{< relref "/latest/user/configuration/apps#public" >}}) of the Server is `8080`, so let's change it:
+   The default exposed [port]({{< relref "/latest/user/configuration/apps#port" >}}) of the Server is `8080`, so let's change it:
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 8080
    ```

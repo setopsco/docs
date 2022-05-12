@@ -64,7 +64,7 @@ configure your app environment, deploy, and monitor your app.
 
 1. Create a `bin` directory in your home directory, in which we will late place a Docker credentials helper to authenticate against the SetOps registry: `mkdir -p "$HOME/bin`
 
-1. Add the `bin` directory to your `PATH` env variable permanently. It depends on the shell you are using how to do this, but for the most use shell `bash` you can execute the following command: `echo 'export "PATH=$HOME/bin:$PATH"' >> "$HOME/.bashrc" `
+1. Add the `bin` directory to your `PATH` env variable permanently. It depends on the shell you are using how to do this, but for `bash` you can execute `echo 'export "PATH=$HOME/bin:$PATH"' >> "$HOME/.bashrc"`, for `zsh` run `echo 'export "PATH=$HOME/bin:$PATH"' >> "$HOME/.zshrc"`. If you use a different shell please consult its documentation on how to modify environment variables globally.
 
 1. Run `setops`.
 
@@ -92,22 +92,7 @@ To log into your account, run:
 $ setops login
 ```
 
-This command will request a short living access token and a refresh token for your local CLI and store it in `~/.setops.yml` alongside the provided org.
-
-Also Docker will be configured to being able to authenticate and push to the SetOps registry. It therefore uses a mechanism called credentials helper. This helper is an executable file which provides Docker with a valid access token to use for authentication. During login the SetOps CLI places a script `docker-credential-setops` into the first of these paths which is writable:
-
-* ~/bin
-* /usr/local/bin
-* /usr/bin
-* /bin
-
-In case this fails, you can put a file anywhere in one of your configured paths in the `PATH` env variable with the following content:
-
-```
-#!/bin/bash
-
-setops docker $@
-```
+This command will request a short living access token and a refresh token for your local CLI and store it in `~/.setops.yml` alongside the provided org. It will also attempt to configure your docker installation to be able to authenticate and push to the SetOps registry. It places a helper script `docker-credential-setops` in your PATH and registers it in your Docker configuration at `~/.docker/config.json`. You can skip the setup by using the `--no-setup` flag with the `login` command. If the automatic setup fails, you can perform a [Manual Setup]({{< relref "#manual-setup" >}}).
 
 You are now ready to use the SetOps CLI.
 
@@ -117,7 +102,29 @@ When running the `setops login` command in a non-interactive environment, like a
 
 ## Switch Organizations
 
-After successful login, your session is linked to the Organization you logged into. If you are a member of multiple Organizations and want to switch between them you can do so by logging out via `setops logout`. Then you can login to other Organization using `setops login`.
+If you are part of multiple organization, you can switch between them with `setops organization:switch <ORGANIZATION>` after successful login.
+
+## Manual Setup {id=manual-setup}
+In order to be able to authenticate with the SetOps registry and push images Docker needs to be configured. SetOps uses a credential-helper which is a small script that handles the authentication for Docker. The script has to be placed in your PATH and registered in you Docker configuration. These steps should be performed automatically during login. If the automatic setup fails, you can place and register the Docker credential-helper manually:
+1. Make sure Docker is installed by by running `docker --version` from your terminal
+2. Create a file named `docker-credential-setops` in a directory that is in your `PATH`
+3. Copy the following script to the file and save it
+   ```bash
+   #!/bin/bash
+   
+   setops docker $@
+   ```
+   The script forwards Docker's request for credentials to the SetOps CLI.
+3. Make the file executable e.g. by running `chmod a+x /path/to/file/docker-credential-setops`
+4. Test the script by running `docker-credential-setops get` from you terminal 
+5. Open `~/.docker/config.json`
+6. Add the following key to the configuration and save the file
+    ```json
+   "credHelpers": {
+       "api.setops.co": "setops"
+   }
+   ```
+You are now ready to use SetOps with Docker.
 
 ## Going further
 

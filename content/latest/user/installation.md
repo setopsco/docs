@@ -91,13 +91,14 @@ To log into your account, run:
 ```
 $ setops login
 ```
+SetOps will open a browser window where you can provide your credentials. If a browser window cannot be opened SetOps will print the link to your terminal, so you can copy it to a browser window. After successful authorization, SetOps will obtain a short living access token and a refresh token for your local CLI and store it in `~/.setops.yml` alongside the provided org.
 
-This command will request a short living access token and a refresh token for your local CLI and store it in `~/.setops.yml` alongside the provided org. It will also attempt to configure your docker installation to be able to authenticate and push to the SetOps registry. It places a helper script `docker-credential-setops` in your PATH and registers it in your Docker configuration at `~/.docker/config.json`. You can skip the setup by using the `--no-setup` flag with the `login` command. If the automatic setup fails, you can perform a [Manual Setup]({{< relref "#manual-setup" >}}).
+It will also attempt to configure your docker installation to be able to authenticate and push to the SetOps registry. It places a helper script `docker-credential-setops` in your PATH and registers it in your Docker configuration at `~/.docker/config.json`. You can skip the setup by using the `--no-setup` flag with the `login` command. If the automatic setup fails, you can perform a [Manual Setup]({{< relref "#manual-setup" >}}).
 
 You are now ready to use the SetOps CLI.
 
 {{< hint warning >}}
-When running the `setops login` command in a non-interactive environment, like a CI job, the interactive login will not work. In this case, you can call `setops login --service-user` and pass in the username and password. However, this is discouraged and should only be used if it is really required since username and password are directly passed into the CLI. For better security, only an access token is stored in `~/.setops.yml` which means that you need to login again after the access token expired.
+When running the `setops login` command in a **non-interactive environment**, like a CI job, the interactive login via browser will not work. In this case, you can call `setops login --service-user` and pass in a username and password. However, this should only be used if it is really required since username and password are directly passed into the CLI. For better security, only an access token is stored in `~/.setops.yml` which means that you need to login again after the access token expired. Login via `--service-user` flag does not support social providers such as GitHub or Google. We recommend to create a dedicated service user account that is used exclusively in these scenarios.
 {{< /hint >}}
 
 ## Switch Organizations
@@ -117,7 +118,7 @@ In order to be able to authenticate with the SetOps registry and push images Doc
    
    setops docker $@
    ```
-   The script forwards Docker's request for credentials to the SetOps CLI.
+   The script forwards Docker's request for credentials to the SetOps CLI.brew info 
 3. Make the file executable e.g. by running `chmod a+x /path/to/file/docker-credential-setops`
 4. Test the script by running `docker-credential-setops get` from you terminal 
 5. Open `~/.docker/config.json`

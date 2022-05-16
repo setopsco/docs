@@ -97,12 +97,15 @@ This command will request a short living access token and a refresh token for yo
 You are now ready to use the SetOps CLI.
 
 {{< hint warning >}}
-When running the `setops login` command in a non-interactive environment, like a CI job, the interactive login will not work. In this case, you can call `setops login --service-user` and pass in the username and password. However this is discouraged and should only be used if it is really required since username and password are directly passed into the CLI. For better security, only an access token is stored in `~/.setops.yml` which means that you need to login again after the access token expired.
+When running the `setops login` command in a non-interactive environment, like a CI job, the interactive login will not work. In this case, you can call `setops login --service-user` and pass in the username and password. However, this is discouraged and should only be used if it is really required since username and password are directly passed into the CLI. For better security, only an access token is stored in `~/.setops.yml` which means that you need to login again after the access token expired.
 {{< /hint >}}
 
 ## Switch Organizations
 
-If you are part of multiple organization, you can switch between them with `setops organization:switch <ORGANIZATION>` after successful login.
+If you are a member of multiple organization, you can switch between them with `setops organization:switch <ORGANIZATION>` after successful login.
+
+## Logout
+If you want to logout from SetOps, you can do so by running `setops logout`. This will deauthorize the current session in your terminal. Please note, that your browser will stay logged in, so if you want to login again you will not have to provide your credentials. To also logout from the browser (e.g. to switch accounts) use `cli logout --browser`.
 
 ## Manual Setup {id=manual-setup}
 In order to be able to authenticate with the SetOps registry and push images Docker needs to be configured. SetOps uses a credential-helper which is a small script that handles the authentication for Docker. The script has to be placed in your PATH and registered in you Docker configuration. These steps should be performed automatically during login. If the automatic setup fails, you can place and register the Docker credential-helper manually:

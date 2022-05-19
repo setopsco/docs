@@ -126,19 +126,6 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
 
 8. Push the image you created earlier to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}).
 
-   First, log in to the Image Registry. Get your login command with `setops registry:login` and follow the instructions:
-
-   ```shell
-   setops registry:login
-   [...]
-   Run the following command to log into the Docker registry:
-
-   printf YOURTOKEN | docker login -u setops --password-stdin api.setops.co
-   [...]
-   ```
-
-   Next, push the Docker image to the registry:
-
    ```shell
    docker tag sample-app:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
    docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest

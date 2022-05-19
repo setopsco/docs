@@ -15,31 +15,11 @@ To run your App on SetOps, you need to provide a Docker image that contains ever
 
 You will use the SetOps Docker registry to make your images available to Apps.
 
-Run `setops registry:login` to find out how to use the Docker registry with your user account.
-
-Pushing an image is a four-step process as outlined below. We assume you already built your image, and it is tagged `YOURIMAGE:latest`.
+Pushing an image is a two-step process, as outlined below. We assume you already built your image, and it is tagged `YOURIMAGE:latest`.
 
 {{< hint info >}}
 Before an image can be pushed to the Docker registry, you must create the App, and commit the Changeset with `changeset:commit`.
 {{< /hint>}}
-
-1. Get the login credentials.
-
-   ```shell
-   setops registry:login
-   ```
-
-1. Log into the registry with your Docker CLI.
-
-   ```shell
-   printf YOURTOKEN | docker login -u setops --password-stdin api.setops.co
-   ```
-
-   (this comes from `setops registry:login`)
-
-   {{< hint info >}}
-   Use `setops registry:login -o plain` to get the `docker login` command without the instructions. This may be useful in CI pipelines, for example.
-   {{< /hint >}}
 
 1. Tag your local image with the registry URL. The URL follows the format `api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:TAG`.
 

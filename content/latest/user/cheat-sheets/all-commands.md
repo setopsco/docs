@@ -173,11 +173,6 @@ login:info
 logout
 ```
 
-## Signup
-```shell
-signup
-```
-
 ## Other
 ```shell
 completion          # Generates a shell completion script

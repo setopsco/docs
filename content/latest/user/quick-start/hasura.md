@@ -93,18 +93,6 @@ You need to build an image of the application to deploy it with SetOps. We use t
 
 7. Push the image to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}).
 
-   First, log in to the Image Registry. Get your login command with `setops registry:login` and follow the instructions:
-
-   ```shell
-   setops registry:login
-   [...]
-   Run the following command to log into the Docker registry:
-
-   printf YOURTOKEN | docker login -u setops --password-stdin api.setops.co
-   [...]
-   ```
-
-   Next, push the Docker image to the registry:
 
    ```shell
    docker tag hasura/graphql-engine:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest

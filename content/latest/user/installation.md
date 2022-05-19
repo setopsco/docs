@@ -98,7 +98,7 @@ It will also attempt to configure your docker installation to be able to authent
 You are now ready to use the SetOps CLI.
 
 {{< hint warning >}}
-When running the `setops login` command in a **non-interactive environment**, like a CI job, the interactive login via browser will not work. In this case, you can call `setops login --service-user` and pass in a username and password. However, this should only be used if it is really required since username and password are directly passed into the CLI. For better security, only an access token is stored in `~/.setops.yml` which means that you need to login again after the access token expired. Login via `--service-user` flag does not support social providers such as GitHub or Google. We recommend to create a dedicated service user account that is used exclusively in these scenarios.
+When running the `setops login` command in a **non-interactive environment**, like a CI job, the interactive login via browser will not work. In this case, you can call `setops login --service-user` and pass in a username and password. However, this should only be used if it is really required since username and password are directly passed into the CLI. For better security, only an access token is stored in `~/.setops.yml` which means that you need to **login again after 4 hours** when the access token expires. Login via `--service-user` flag does not support social providers such as GitHub or Google. We recommend to create a dedicated service user account that is used exclusively in these scenarios.
 {{< /hint >}}
 
 ## Switch Organizations

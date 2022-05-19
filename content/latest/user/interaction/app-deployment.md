@@ -15,7 +15,7 @@ To run your App on SetOps, you need to provide a Docker image that contains ever
 
 You will use the SetOps Docker registry to make your images available to Apps.
 
-Pushing an image is a two-step process as outlined below. We assume you already built your image, and it is tagged `YOURIMAGE:latest`.
+Pushing an image is a two-step process, as outlined below. We assume you already built your image, and it is tagged `YOURIMAGE:latest`.
 
 {{< hint info >}}
 Before an image can be pushed to the Docker registry, you must create the App, and commit the Changeset with `changeset:commit`.

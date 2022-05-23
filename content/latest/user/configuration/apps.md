@@ -123,12 +123,12 @@ ENVs:
 -- RACK_ENV   production                 (The Rack environment)
 -- WHO_AM_I   parkscheibe/statging/web   (Project/Environment/App)
 CustomDomains:
-+---------------+---------+-----------+
-|    ADDRESS    | PRIMARY | VALIDATED |
-+---------------+---------+-----------+
-| www.zwei.beer | true    | false     |
-| zwei.beer     | false   | false     |
-+---------------+---------+-----------+
++---------------+-----------+
+|    ADDRESS    | VALIDATED |
++---------------+-----------+
+| www.zwei.beer | false     |
+| zwei.beer     | false     |
++---------------+-----------+
 Active Release: 1
 
 Status
@@ -567,7 +567,6 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
 
 
 Domain setops.co
-   Primary:     true
    Validated:   false
 
    ⏳ This domain has not yet been validated.
@@ -589,7 +588,6 @@ Domain setops.co
 
 
 Domain web.production.project1.$YOURDOMAIN
-   Primary:     false
    Validated:   true
 
    The default domain for this app.
@@ -597,7 +595,6 @@ Domain web.production.project1.$YOURDOMAIN
 
 
 Domain web.production.project1.$YOURDOMAIN.internal
-   Primary:     false
    Validated:   true
 
    The private domain for this app.
@@ -612,33 +609,23 @@ For a Custom Domain Record, there is a default record type and an optional alter
 
 * The **alternative record type** may be used when the default record is not applicable. This may happen with a domain APEX (e.g. `setops.co`), but should not happen with subdomains (e.g. `api.setops.co`). It is property of the DNS that `CNAME` records [can not be used for a domain APEX](https://www.isc.org/blogs/cname-at-the-apex-of-a-zone/). While some popular DNS providers have built features to work around this issue, some do not and this is when the alternative record must be used. `CNAME` records for APEX domains are sometimes called `ANAME` or `ALIAS` records. Refer to your DNS provider's documentation to learn more if and how they support this.
 
-In order to create a Custom Domain, run `domain:create DOMAIN [--primary]`:
+In order to create a Custom Domain, run `domain:create DOMAIN`:
 
 ```shell
-setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain:create setops.co --primary
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain:create setops.co
 ```
 ```
-+-----------+---------+-----------+
-|  ADDRESS  | PRIMARY | VALIDATED |
-+-----------+---------+-----------+
-| setops.co | true    | false     |
-+-----------+---------+-----------+
++-----------+-----------+
+|  ADDRESS  | VALIDATED |
++-----------+-----------+
+| setops.co | false     |
++-----------+-----------+
 ```
 
 Custom Domains can be deleted by running `domain:destroy DOMAIN`.
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain:destroy setops.co
 ```
-
-#### Primary Domain
-
-An App can have any number of custom domains but only one **Primary Domain**. The Primary Domain is where your app will be served. Any other domain (custom domains or the default domain) will redirect to your Primary Domain.
-
-{{< hint info >}}
-Do not forget to add the `--primary` flag to `domain:create` as this value can not be changed later.
-
-If you want to set an existing domain as the primary domain, remove it with `domain:destroy` and re-add it with `domain:create --primary` in the **same changeset** to avoid having to re-validate it.
-{{< /hint >}}
 
 #### Domain Validation
 
@@ -656,7 +643,6 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
 
 
 Domain setops.co
-   Primary:     true
    Validated:   false
 
    ⏳ This domain has not yet been validated.
@@ -677,7 +663,6 @@ Domain setops.co
       Value:   _5a892a6631c5d51bc87519faa60b8624.duyqrilejt.acm-validations.aws.
 
 Domain web.production.project1.$YOURDOMAIN
-   Primary:     false
    Validated:   true
 
    The default domain for this app.
@@ -685,7 +670,6 @@ Domain web.production.project1.$YOURDOMAIN
 
 
 Domain web.production.project1.$YOURDOMAIN.internal
-   Primary:     false
    Validated:   true
 
    The private domain for this app.
@@ -715,6 +699,20 @@ _5a892a6631c5d51bc87519faa60b8624.duyqrilejt.acm-validations.aws.
 ```
 
 If `dig` does not print the expected value, double check your DNS settings and try again later, as DNS changes may take some time to propagate through the system.
+{{< /hint >}}
+
+### Public Custom Wildcard Domains
+
+In addition to the public custom domains described in the previous section, you can also add public wildcard domains. If you configure a wildcard domain, e.g. `*.setops.co`, your app will be reachable on all subdomains of this domain, e.g. `api.setops.co`, `docs.setops.co`, `www.setops.co`.
+
+Just add a custom domain with the wildcard notation (`*.<your domain>`) like you would do with a single domain:
+
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain:create '*.setops.co'
+```
+
+{{< hint warning >}}
+Keep in mind that `*` is a character with special meaning in most shells. So when you run this command, make sure that you always **single quote** your domain, e.g. `'*.setops.co'`!
 {{< /hint >}}
 
 ## Going further

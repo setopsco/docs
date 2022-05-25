@@ -10,7 +10,7 @@ At this moment, you can read through these guides:
 
 ## CI Systems Integration
 
-* [`git push` Deployments using GitHub Actions](https://github.com/setopsco/community-docs/tree/main/github-actions)
+* [`git push` Deployments using GitHub Actions](https://github.com/setopsco/github-actions)
 * [`git push` Deployments using Bitbucket Pipelines](https://github.com/setopsco/community-docs/tree/main/bitbucket-pipelines)
 
 ## Proxy Applications

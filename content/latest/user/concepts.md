@@ -16,7 +16,7 @@ A **Project** acts as a namespace for your application. It has a unique name, i.
 
 ## Stage
 
-A **Stage** a self-contained deployment environment. It is tied to a project and has a unique name, i.e. *staging* or *production*. A given stage is completely isolated from all other stages, which means that it does not share any resources or data with them.
+A **Stage** is a self-contained deployment environment. It is tied to a project and has a unique name, i.e. *staging* or *production*. A given stage is completely isolated from all other stages, which means that it does not share any resources or data with them.
 
 ## App
 

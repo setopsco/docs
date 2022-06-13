@@ -201,7 +201,7 @@ Check out the [Health Checks]({{< relref "/latest/user/configuration/apps#health
 
 The Container Health Check configuration determines how the health of a container is monitored. The system periodically runs a command you specify inside your App's container. The command exit code determines the healthiness of the container. When it returns with exit code `0`, the check is deemed successful. Should it return with any other exit code, the check is failed and the container is unhealthy. After the given grace period specified by `interval`, `timeout`, `retries`, and `start-period`, the container will be terminated and replaced with a new one. It is recommended to set the `start-period` to a big enough value so that the app can start and warm up and the `interval`, `timeout` and `retries` to a low value so that downtimes are quickly detected.
 
-The Container Health Check is **optional** (off by default), but highly recommended. It is configured with the required `command` parameter:
+The Container Health Check is **optional** (off by default), but highly recommended. When you use the SetOps composite action on GitHub, a valid container health-check is mandatory since the action checks for a healthy container after deployment. The health-check is configured with the required `command` parameter:
 
 | Parameter | Valid Values | Default | Description |
 |---|---|---|---|
@@ -211,7 +211,7 @@ The Container Health Check is **optional** (off by default), but highly recommen
 |  `retries`  | 1-30 | 5 | Configures the number of retries the health check will attempt before declaring the App not healthy.  |
 | `start-period`  | 0-60 | 15 | Defines when the health check is attempted for the first time after starting the App.  |
 
-The other 4 parameters are optional and defaults are used as shown above if ommited.
+The other 4 parameters are optional and defaults are used as shown above if omitted.
 
 To configure the container health check, use `container:set health-check --interval INTERVAL --timeout TIMEOUT --retries RETRIES --start-period STARTPERIOD -- COMMAND`.
 
@@ -250,7 +250,14 @@ Health Check:
 An existing container health check configuration can be overwritten by running the command again with different parameters.
 
 {{< hint info >}}
-Make sure to type `--` in front of your entrypoint value so that the CLI knows your to use everything after the dashes as the entrypoint value and not try to use it as flags and parameters. Ensure to place all flags and parameters, e.g. `-s`, before `--`.
+Make sure to type `--` in front of your cmd value so that the CLI recognizes everything after the dashes as the cmd value and not try to use it as flags and parameters. Ensure to place all flags and parameters, e.g. `-s`, before `--`.
+{{< /hint >}}
+
+{{< hint info >}}
+You can use **automatically configured environment variables** such as **`$PORT`** in you command. If you configure the health-check via CLI and utilize ENVs, make sure to enclose the actual cmd in single quotes. If you use double quotes your terminal will interpret the given ENVs on your local machine and not keep them as part of the cmd. The following example shows the correct usage:
+```shell
+setops <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
+```
 {{< /hint >}}
 
 {{< hint info >}}

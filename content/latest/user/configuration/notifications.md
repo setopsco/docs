@@ -59,6 +59,13 @@ setops --stage <STAGE> notification:destroy my_opsgenie_integration
 
 Email targets provide a very simple way to set up notifications. After configuring an email address as an notification target, a validation email is send to the address to subscribe to the notifications. You will only receive notifications after you opened the confirmation link in the email.
 
+In order to create the example my_email_notifications Notification, you would run the following command:
+
+```shell
+setops -p <PROJECT> -s <STAGE> notification:create my_email_notifications --type email --target <EMAIL ADDRESS>
+setops -p <PROJECT> -s <STAGE> changeset:commit
+```
+
 ## Webhook Targets {id=webhook}
 
 Webhook Targets may be used to send alerts from SetOps to external systems, such as [OpsGenie](https://www.atlassian.com/software/opsgenie) or your own integration.

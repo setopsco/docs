@@ -57,9 +57,9 @@ setops --stage <STAGE> notification:destroy my_opsgenie_integration
 
 ## Email Targets {id=email}
 
-Email targets provide a very simple way to set up notifications. After configuring an email address as an notification target, a validation email is send to the address to subscribe to the notifications. You will only receive notifications after you opened the confirmation link in the email.
+Email targets provide a very simple way to set up notifications. After configuring an email address as a notification target, a validation email is sent to the address to subscribe to the notifications. You will only receive notifications after opening the email's confirmation link.
 
-In order to create the example my_email_notifications Notification, you would run the following command:
+To create the example `my_email_notifications` Notification, you would run the following command:
 
 ```shell
 setops -p <PROJECT> -s <STAGE> notification:create my_email_notifications --type email --target <EMAIL ADDRESS>

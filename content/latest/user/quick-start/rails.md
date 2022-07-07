@@ -59,7 +59,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
 
    To get the Rails app started inside the container, we need to set a `command`:
    ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- bundle exec puma
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed && bundle exec puma
    ```
 
    Let's also configure a [container Health Check]({{< relref "/latest/user/configuration/apps#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
@@ -115,7 +115,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
 
    ```shell
    cd /path/to/cloned/repository # from step 1
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy --build-with-docker . -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy --build-with-docker .
    ```
    
    {{< hint info >}}`release:deploy` executes all required steps to deploy a new image to SetOps. You can find more information about the distinct steps and how to run them isolated [here]({{< relref "/latest/user/interaction/app-deployment" >}}).{{< /hint >}}

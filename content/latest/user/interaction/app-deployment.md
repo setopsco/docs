@@ -9,6 +9,62 @@ Apps run in Docker containers based on images stored in a Docker registry. We pr
 
 Refer to the [Stages]({{< relref "/latest/user/configuration/stages" >}}) and [Apps]({{< relref "/latest/user/configuration/apps" >}}) Guides for instructions on how to create those.
 
+# `release:deploy` command
+
+The easiest way to deploy an image to SetOps is to use the `release:deploy` command since it wraps all the required actions from obtaining or building the image to the release creation and activation. You can also run the different steps manually, of course. See [Manual Release Steps]({{< relref "/latest/user/interaction/app-deployment#manual-release-steps" >}}) for reference. There are different scenarios in which you can use `release:deploy`:
+
+## With an existing local image
+If you have build an image in your local machine already, you simply need to provide either the sha256 hash or your local tag if you provided one.
+```shell
+# with sha256 hash
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy sha256:2b51cdaabcdc9c35b36e998ec81d2ed8507def0e4709a4d5003414e727e67fa9
+
+# with local tag
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy my-local-image-tag
+```
+
+## With an existing image from the docker registry
+You can also pull an image from the Docker registry. Just specify the image name as you would do with `docker pull`.
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy <IMAGETAG>
+
+# e.g.
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy gitpod/openvscode-server:latest
+```
+
+## Building an image with Docker
+You can also build the image from a repo with Dockerfile. Use `--docker:build-arg 'build-arg'` to pass build args to Docker. If your Dockerfile is not named `Dockerfile` or is not located in the repo's root directory, you can specify its location with `--docker:file`.
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy --build-with-docker [--docker:build-arg 'build-arg'] [--docker:file '/path/to/dockerfile'] /path/to/repository
+
+# e.g.
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> --build-with-docker --docker:build-arg 'RAILS_ENV=production' --docker:file './MyCustomDockerfile' .
+```
+
+## Building an image with pack CLI
+Another way to build your image locally is [pack CLI](https://buildpacks.io/docs/tools/pack/). In order to build with pack, make sure you have pack CLI installed on your system.
+`--pack:builder` specifies the builder to be used to create the image. It defaults to the popular [heroku/buildpacks:20](https://devcenter.heroku.com/articles/heroku-20-stack). With `--pack:buildpack` you can specify one or multiple buildpacks to be used with pack. You can also provide ENVs on buildtime with either `--pack:env KEY=VALUE` (can be used multiple times) or reference an ENV file with `--pack:env-file`.
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy --build-with-pack [--pack:builder 'builder'] [--pack:buildpack 'buildpack'] [--pack:env 'KEY=VALUE'] [--pack:env-file '/path/to/env/file'] /path/to/repository
+
+# e.g.
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> --build-with-pack --pack:builder heroku/buildpacks:20 --pack:env 'RAILS_ENV=production' --pack:env 'RACK_ENV=production' .
+```
+
+## Migrations and One-Off tasks
+Oftentimes new releases require migrations and other tasks to be executed before the release. `release:deploy` allows you to specify these commands and will execute them after the new image is pushed to SetOps. Just append to command at end with leading `--`.
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> --build-with-pack --pack:builder heroku/buildpacks:20 --pack:env 'RAILS_ENV=production' --pack:env 'RACK_ENV=production' . -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
+```
+
+
+# Manual release steps{id=manual-release-steps}
+
+To release a new app version to SetOps the following steps are required.
+
+![Release Steps](release-steps.png)
+
+
 ## Image Registry {id=registry}
 
 To run your App on SetOps, you need to provide a Docker image that contains everything the App needs to run: the base operating system, libraries, and your code.

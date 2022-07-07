@@ -18,7 +18,7 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    setops project:create <PROJECT>
    ```
 
-1. Create a [Stage]({{< relref "/latest/user/configuration/stages" >}}) for your project.
+2. Create a [Stage]({{< relref "/latest/user/configuration/stages" >}}) for your project.
 
    ```shell
    setops -p <PROJECT> stage:create <STAGE>
@@ -28,7 +28,7 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    `project` and `stage` must only contain lowercase letters `a-z` and numbers `0-9` and start with a lowercase letter. The length of `project` has to be between 3 and 20 characters and the length of `stage` between 3 and 12. It also has to start with a lowercase letter. A valid example is `parkscheibe` & `staging`.
    {{< /hint >}}
 
-1. Create the [App]({{< relref "/latest/user/configuration/apps" >}}) _web_.
+3. Create the [App]({{< relref "/latest/user/configuration/apps" >}}) _web_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
@@ -48,7 +48,7 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    ```
 
-1. Create the [Services]({{< relref "/latest/user/configuration/services" >}}) the App needs.
+4. Create the [Services]({{< relref "/latest/user/configuration/services" >}}) the App needs.
 
    We need to create a [Volume]({{< relref "/latest/user/configuration/services#volume" >}}) for the data and link it to the App `<APPNAME>`.
 
@@ -57,56 +57,34 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create volume --path /home/workspace
    ```
 
-1. Commit your [Changeset]({{< relref "/latest/user/configuration/changesets" >}}).
+5. Commit your [Changeset]({{< relref "/latest/user/configuration/changesets" >}}).
 
    ```shell
    setops -p <PROJECT> -s <STAGE> changeset:commit
    ```
 
-## Pull your Image
-You need to build an image of the application to deploy it with SetOps. We use the Docker Image from [dockerhub](https://hub.docker.com/r/gitpod/openvscode-server). You can use our `Dockerfile` for your own apps, too.
+## Deploy your image
 
-6. Pull the image using `docker pull`.
+6. Deploy your image
 
-   ```shell
-   docker pull gitpod/openvscode-server:latest
-   ```
+      ```shell
+      setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy gitpod/openvscode-server:latest
+      ```
+      {{< hint info >}}`release:deploy` executes all required steps to deploy a new image to SetOps. You can find more information about the distinct steps and how to run them isolated [here]({{< relref "/latest/user/interaction/app-deployment" >}}).{{< /hint >}}
 
-## Deploy your Image
-
-7. Push the image to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}).
-
-   ```shell
-   docker tag gitpod/openvscode-server:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   ```
-
-   ```
-   [...]
-   web: digest: sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c size: 3245
-   ```
-
-8. Create a [release]({{< relref "/latest/user/interaction/app-deployment#releases" >}}) and deploy it.
-
-     ```shell
-     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c
-     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
-     setops -p <PROJECT> -s <STAGE> changeset:commit
-     ```
-
-9. Verify your app status is `RUNNING`.
+8. Verify your app status is `RUNNING`.
 
       ```shell
       setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
       ```
 
-10. Open the application in your browser.
+9. Open the application in your browser.
 
-      Copy the domain in format `web.staging.project.$YOURDOMAIN`.
+     Copy the domain in format `web.staging.project.$YOURDOMAIN`.
 
-      ```shell
-      setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
-      ```
+     ```shell
+     setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
+     ```
 
 Enjoy!
 
@@ -125,18 +103,9 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops -p <PROJECT> -s <STAGE> changeset:commit
    ```
 
-   ### Push App to SetOps Registry
-   ```shell
-   docker pull gitpod/openvscode-server:latest
-   docker tag gitpod/openvscode-server:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   ```
-
    ### Deploy App
    ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create <SHA FROM PUSH>
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
-   setops -p <PROJECT> -s <STAGE> changeset:commit
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy gitpod/openvscode-server:latest
    ```
 
    ### Destroy Stage & Project

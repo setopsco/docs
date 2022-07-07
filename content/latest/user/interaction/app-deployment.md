@@ -52,13 +52,18 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> --build-with-pack --pack:builder 
 ```
 
 ## Migrations and One-Off tasks
-Oftentimes new releases require migrations and other tasks to be executed after the release. `release:deploy` allows you to specify these commands and will execute them after the new image is pushed to SetOps. Just append to command at end with leading `--`.
+Oftentimes new releases require migrations and other tasks to be executed before the release. `release:deploy` allows you to specify these commands and will execute them after the new image is pushed to SetOps. Just append to command at end with leading `--`.
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> --build-with-pack --pack:builder heroku/buildpacks:20 --pack:env 'RAILS_ENV=production' --pack:env 'RACK_ENV=production' . -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
 ```
 
 
 # Manual release steps{id=manual-release-steps}
+
+To release a new app version to SetOps the following steps are required.
+
+![Release Steps](release-steps.png)
+
 
 ## Image Registry {id=registry}
 

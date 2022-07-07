@@ -126,15 +126,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
      setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
      ```
 
-10. We will also need to initialize the database schema and load some sample data from the seeds (`db/seeds.rb`).
-
-      Run `rake db:schema:load db:seed` to load the database schema and populate it with seed data:
-
-      ```shell
-      setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
-      ```
-
-11. Open the application in your browser.
+10. Open the application in your browser.
 
       Copy the domain in format `web.staging.project.$YOURDOMAIN`.
 

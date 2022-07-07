@@ -80,52 +80,31 @@ In this tutorial, you will deploy your own [Hasura GraphQL Engine](https://githu
    setops -p <PROJECT> -s <STAGE> changeset:commit
    ```
 
-## Pull your Image
+## Deploy your Image
 You need to build an image of the application to deploy it with SetOps. We use the Docker Image from [dockerhub](https://hub.docker.com/r/hasura/graphql-engine). You can use our `Dockerfile` for your own apps, too.
 
-6. Pull the image using `docker pull`.
+6. Pull and deploy your Image
 
    ```shell
-   docker pull hasura/graphql-engine:latest
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy hasura/graphql-engine:latest
    ```
 
-## Deploy your Image
+   {{< hint info >}}`release:deploy` executes all required steps to deploy a new image to SetOps. You can find more information about the distinct steps and how to run them isolated [here]({{< relref "/latest/user/interaction/app-deployment" >}}).{{< /hint >}}
 
-7. Push the image to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}).
-
-
-   ```shell
-   docker tag hasura/graphql-engine:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   ```
-
-   ```
-   [...]
-   web: digest: sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c size: 3245
-   ```
-
-8. Create a [release]({{< relref "/latest/user/interaction/app-deployment#releases" >}}) and deploy it.
-
-     ```shell
-     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c
-     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
-     setops -p <PROJECT> -s <STAGE> changeset:commit
-     ```
-
-9. Verify your app status is `RUNNING`.
+7. Verify your app status is `RUNNING`.
 
       ```shell
       setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
       ```
 
-10. Open the application in your browser.
+8. Open the application in your browser.
 
-      Copy the domain in format `web.staging.project.$YOURDOMAIN`.
+     Copy the domain in format `web.staging.project.$YOURDOMAIN`.
 
-      ```shell
-      setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
-      ```
-      You can log in with the secret defined in the environment variable: `setopsftw`.
+     ```shell
+     setops -p <PROJECT> -s <STAGE> --app <APPNAME> domain
+     ```
+     You can log in with the secret defined in the environment variable: `setopsftw`.
 
 Enjoy!
 
@@ -150,18 +129,9 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops -p <PROJECT> -s <STAGE> changeset:commit
    ```
 
-   ### Push App to SetOps Registry
+   ### Pull and deploy App to SetOps Registry
    ```shell
-   docker pull hasura/graphql-engine:latest
-   docker tag hasura/graphql-engine:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   ```
-
-   ### Deploy App
-   ```shell
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create <SHA FROM PUSH>
-   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
-   setops -p <PROJECT> -s <STAGE> changeset:commit
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy hasura/graphql-engine:latest
    ```
 
    ### Destroy Stage & Project

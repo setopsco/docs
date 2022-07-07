@@ -17,19 +17,6 @@ In this tutorial, you will deploy the sample application from Michael Hartl's bo
    git clone https://github.com/setopsco/rails-sample-app
    ```
 
-## Build your Image
-You need to build an image of your application to deploy it with SetOps. We have included a `Dockerfile` with the Rails sample app. You can use our `Dockerfile` for your own apps, too.
-
-2. Build the image using `docker build`.
-
-   ```shell
-   docker build --pull -t sample-app:latest .
-   ```
-
-   {{< hint info >}}
-   💡if you're not sure about building App Images, have a quick look at our best practices for [building an image]({{< relref "/latest/user/best-practices/build-image" >}}).
-   {{< /hint >}}
-
 ## Prepare your SetOps Environment
 At first, you need to choose a name for `project`, `stage`, and `app`. You can edit them in the form in the top right corner.
 
@@ -108,7 +95,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    Next, create a [S3 Object Store Service]({{< relref "/latest/user/configuration/services#s3" >}}) and link it to the App `<APPNAME>`.
 
    ```shell
-   setops -p <PROJECT> -s <STAGE> service:create store --type s3 --plan default
+   setops -p <PROJECT> -s <STAGE> service:create store --type s3
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create store --env-key S3_DATA_URL
    ```
 
@@ -124,33 +111,22 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
 
 ## Deploy your Image
 
-8. Push the image you created earlier to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}).
+8. Build and push the image from the repo cloned earlier to the SetOps [Image Registry]({{< relref "/latest/user/interaction/app-deployment#registry" >}}). Also initialize the database schema and load some sample data from the seeds (`db/seeds.rb`).
 
    ```shell
-   docker tag sample-app:latest api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
-   docker push api.setops.co/<ORGANIZATION>/<PROJECT>/<STAGE>/<APPNAME>:latest
+   cd /path/to/cloned/repository # from step 1
+   setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:deploy --build-with-docker . -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
    ```
+   
+   {{< hint info >}}`release:deploy` executes all required steps to deploy a new image to SetOps. You can find more information about the distinct steps and how to run them isolated [here]({{< relref "/latest/user/interaction/app-deployment" >}}).{{< /hint >}}
 
-   ```
-   [...]
-   web: digest: sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c size: 3245
-   ```
-
-9. Create a [release]({{< relref "/latest/user/interaction/app-deployment#releases" >}}) and deploy it.
+9. Verify your app is running and its health status is `HEALTHY`.
 
      ```shell
-     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:create sha256:0f7d58c45f7d97013c209b2603f2d098fd0ccfefb2ee738bcbce154491d2426c
-     setops -p <PROJECT> -s <STAGE> --app <APPNAME> release:activate 1
-     setops -p <PROJECT> -s <STAGE> changeset:commit
+     setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
      ```
 
-10. Verify your app is running and its health status is `HEALTHY`.
-
-      ```shell
-      setops -p <PROJECT> -s <STAGE> app:info <APPNAME>
-      ```
-
-11. We will also need to initialize the database schema and load some sample data from the seeds (`db/seeds.rb`).
+10. We will also need to initialize the database schema and load some sample data from the seeds (`db/seeds.rb`).
 
       Run `rake db:schema:load db:seed` to load the database schema and populate it with seed data:
 
@@ -158,7 +134,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
       setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- env DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load db:seed
       ```
 
-12. Open the application in your browser.
+11. Open the application in your browser.
 
       Copy the domain in format `web.staging.project.$YOURDOMAIN`.
 
@@ -194,7 +170,7 @@ If you don’t want explanations for all the commands, you can use these snippet
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/.well-known/health-check'
    setops -p <PROJECT> -s <STAGE> service:create database --type postgresql11 --plan shared
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create database --env-key DATABASE_URL
-   setops -p <PROJECT> -s <STAGE> service:create store --type s3 --plan default
+   setops -p <PROJECT> -s <STAGE> service:create store --type s3
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> link:create store --env-key S3_DATA_URL
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> env:set SECRET_KEY_BASE=$(openssl rand -hex 64)
    setops -p <PROJECT> -s <STAGE> changeset:commit

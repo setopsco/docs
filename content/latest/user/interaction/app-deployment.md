@@ -7,7 +7,7 @@ This guide describes how to deploy an App with SetOps.
 
 Apps run in Docker containers based on images stored in a Docker registry. We provide this registry for you. In the following, we assume that there is an Organization `<ORGANIZATION>`, a Project `<PROJECT>` and a Stage `<STAGE>` with an App named `<APPNAME>`.
 
-Refer to the [Stages]({{< relref "/latest/user/configuration/stages" >}}) and [Apps]({{< relref "/latest/user/configuration/apps" >}}) Guides for instructions on how to create those.
+Refer to the [Stages]({{< relref "/latest/user/configuration/stages" >}}) and [Apps]({{< relref "/latest/user/configuration/apps/overview" >}}) Guides for instructions on how to create those.
 
 ## Image Registry {id=registry}
 
@@ -155,7 +155,7 @@ Tasks
 
 Deploying the App is in progress. The task with Release ID 2 has been successfully replaced by a Task with Release ID 3.
 
-The SetOps Container Runtime will ensure that the new task is working as intended before it is served any traffic. This means both the [Container Health Check]({{< relref "apps#container-health-check" >}}) and the [Network Health Check]({{< relref "apps#network-health-check" >}}) need to pass before the failover is initiated. The failover is seamless and does not incur any downtime of your app.
+The SetOps Container Runtime will ensure that the new task is working as intended before it is served any traffic. This means both the [Container Health Check]({{< relref "/latest/user/configuration/apps/container#container-health-check" >}}) and the [Network Health Check]({{< relref "/latest/user/configuration/apps/network#network-health-check" >}}) need to pass before the failover is initiated. The failover is seamless and does not incur any downtime of your app.
 
 ### Run Migrations
 
@@ -191,7 +191,7 @@ The **Status** section describes the number of active, desired and pending tasks
 
 When the App is running correctly, the number of desired tasks and running tasks should be equal. Note that not active tasks are not automatically pending. Thus, pending does not have to be equal to the difference between desired and active tasks.
 
-Your App will usually have one task per instance. The number of instances can be configured via `scale` in the [App configuration]({{< relref "/latest/user/configuration/apps#scale" >}}).
+Your App will usually have one task per instance. The number of instances can be configured via `scale` in the [App configuration]({{< relref "/latest/user/configuration/apps/resources#scale" >}}).
 
 The **Tasks** section lists specific information for each individual task:
 
@@ -206,7 +206,7 @@ The **Tasks** section lists specific information for each individual task:
   * `STOPPING` – waiting on the container agent to take further action
   * `DEPROVISIONING` – need to perform additional steps after the task has stopped but before the task transitions to the STOPPED state
   * `STOPPED` – task has been successfully stopped
-* **Health Status**: [Container Health Check]({{< relref "/latest/user/configuration/apps#container-health-check" >}}) status, can be one of:
+* **Health Status**: [Container Health Check]({{< relref "/latest/user/configuration/apps/container#container-health-check" >}}) status, can be one of:
   * `HEALTHY` – container Health Check has passed successfully
   * `UNHEALTHY` – container Health Check has failed
   * `UNKNOWN` – container Health Check is being evaluated or there is no container Health Check defined

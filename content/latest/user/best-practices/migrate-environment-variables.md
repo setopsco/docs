@@ -39,4 +39,4 @@ We came up with a best practice to migrate ENVs:
 1. Check Environment Variables in your App: `setops -p <PROJECT> -s <STAGE> --app <APPNAME> env`
 
 ## Going further
-Read more about Environment Variables and how to set them in the [Environment Variables Section]({{< relref "apps#environment-variables" >}}).
+Read more about Environment Variables and how to set them in the [Environment Variables Section]({{< relref "/latest/user/configuration/apps/environment" >}}).

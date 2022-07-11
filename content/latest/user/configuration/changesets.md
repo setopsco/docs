@@ -75,4 +75,4 @@ setops -p <PROJECT> -s <STAGE> changeset:discard
 
 ## Going further
 
-[Create your first App]({{< relref "/latest/user/configuration/apps" >}}) with a Changeset.
+[Create your first App]({{< relref "/latest/user/configuration/apps/overview" >}}) with a Changeset.

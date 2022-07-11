@@ -40,7 +40,7 @@ You can use any Docker Image created by others and published in a Docker registr
 If you're developing an application, you can create your own [Docker Image](https://docs.docker.com/get-started/overview/#docker-registries). To do this with Docker, you need a Dockerfile. Check out Docker's [Image-building best practices](https://docs.docker.com/get-started/09_image_best/) and [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
 
 {{< hint info >}}
-You can overwrite the last `CMD` command of your Dockerfile at the SetOps App level. See App's [Command Reference]({{< relref "apps#command" >}}) for further information.
+You can overwrite the last `CMD` command of your Dockerfile at the SetOps App level. See App's [Command Reference]({{< relref "/latest/user/configuration/apps/container#command" >}}) for further information.
 {{< /hint >}}
 {{< /details >}}
 

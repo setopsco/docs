@@ -49,7 +49,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    `project` and `stage` must only contain lowercase letters `a-z` and numbers `0-9` and start with a lowercase letter. The length of `project` has to be between 3 and 20 characters and the length of `stage` between 3 and 12. It also has to start with a lowercase letter. A valid example is `parkscheibe` & `staging`.
    {{< /hint >}}
 
-5. Create the [App]({{< relref "/latest/user/configuration/apps" >}}) _web_.
+5. Create the [App]({{< relref "/latest/user/configuration/apps/overview" >}}) _web_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
@@ -59,13 +59,13 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    The name for apps must only contain lowercase letters `a-z` and numbers `0-9` and dashes `-`. The name must be between 3 and 16 characters long and start with a lowercase letter.
    {{< /hint >}}
 
-   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/latest/user/configuration/apps#public" >}}) to _true_.
+   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/latest/user/configuration/apps/network#public" >}}) to _true_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
 
-   Next, we need to change the default [resources]({{< relref "/latest/user/configuration/apps#resource-parameters" >}}) for a container since Rails' memory consumption is higher:
+   Next, we need to change the default [resources]({{< relref "/latest/user/configuration/apps/resources" >}}) for a container since Rails' memory consumption is higher:
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set memory 512
    ```
@@ -75,7 +75,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set command -- bundle exec puma
    ```
 
-   Let's also configure a [container Health Check]({{< relref "/latest/user/configuration/apps#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
+   Let's also configure a [container Health Check]({{< relref "/latest/user/configuration/apps/container#container-health-check" >}}), which is executed in the container and checks if our app is healthy.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:set health-check -- /bin/sh -c 'curl -s http://localhost:$PORT/.well-known/health-check | grep ok'
@@ -84,7 +84,7 @@ At first, you need to choose a name for `project`, `stage`, and `app`. You can e
    The Health Check command must be installed within the App's Docker image. For example, when using `sh` and `curl` for the Health Check command, make sure the `curl` binary and a `shell` is present in the image. In case the container is not `HEALTHY`, check the logs and test your image.
    {{< /hint >}}
 
-   The Health Check path deviates from the default path (`/`), so you need to adjust the [network Health Check]({{< relref "/latest/user/configuration/apps#network-health-check" >}}) as well.
+   The Health Check path deviates from the default path (`/`), so you need to adjust the [network Health Check]({{< relref "/latest/user/configuration/apps/network#network-health-check" >}}) as well.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set health-check-path '/.well-known/health-check'

@@ -2,32 +2,6 @@
 weight: 30
 ---
 ## Network Parameters
-### Protocol {id=protocol}
-
-The Protocol determines how the App can be accessed from the outside. Like Scale, Protocol also is a mandatory parameter. Therefore, it can be modified by subsequently running the `network:set protocol` command, but it can not be deleted from an App.
-
-Valid values for Protocol are `http` and `tcp`. It defaults to `http`.
-
-The Protocol value also determines how the App is reachable from the outside, and how it is checked for its health. The details are outlined in the table below.
-
-| Protocol | Default Container Port | External Port | Health Check | Notes |
-|----------|------------------------|---------------|--------------|-------|
-| `http` | 5000 | 443 | 200-499 response on `/` | App runs a plain, unencrypted HTTP server - TLS is offloaded at Layer 7 Load Balancer |
-| `tcp` | 5000 | 5000 | TCP connection can be established | App uses Layer 3 Load Balancer - no offloading |
-
-{{< hint info >}}
-Make sure your App binds to the address `0.0.0.0`. Some frameworks and application servers use the loopback address `127.0.0.1` (localhost) by default, but this does not allow external connections. You can also read the environment variable `PORT` to find out which port we expect your application to listen on.
-{{< /hint >}}
-
-To configure the Protocol, use `network:set protocol PROTOCOL`.
-
-```shell
-setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set protocol http
-```
-
-{{< hint warning >}}
-After committing your application for the first time, the protocol cannot be changed. If you need to change the protocol, you need to delete the app and create it again. Keep in mind that it can take some time for the new app to become broadly available due to DNS caching.
-{{< /hint >}}
 
 ### Public
 
@@ -63,6 +37,33 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 4400
 ```
 
 You can remove the custom port by running `network:unset port`. The app will then again default to port 5000.
+
+### Protocol {id=protocol}
+
+The Protocol determines how the App can be accessed via the network. Like Scale, Protocol also is a mandatory parameter. Therefore, it can be modified by subsequently running the `network:set protocol` command, but it can not be deleted from an App.
+
+Valid values for Protocol are `http` and `tcp`. It defaults to `http`.
+
+The Protocol value also determines how the App is reachable from the outside (if Public is set to true), and how it is checked for its health. The details are outlined in the table below.
+
+| Protocol | Default Container Port | External Port | Health Check | Notes |
+|----------|------------------------|---------------|--------------|-------|
+| `http` | 5000 | 443 | 200-499 response on `/` | App runs a plain, unencrypted HTTP server - TLS is offloaded at Layer 7 Load Balancer |
+| `tcp` | 5000 | 5000 | TCP connection can be established | App uses Layer 3 Load Balancer - no offloading |
+
+{{< hint info >}}
+Make sure your App binds to the address `0.0.0.0`. Some frameworks and application servers use the loopback address `127.0.0.1` (localhost) by default, but this does not allow external connections. You can also read the environment variable `PORT` to find out which port we expect your application to listen on.
+{{< /hint >}}
+
+To configure the Protocol, use `network:set protocol PROTOCOL`.
+
+```shell
+setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set protocol http
+```
+
+{{< hint warning >}}
+After committing your application for the first time, the protocol cannot be changed. If you need to change the protocol, you need to delete the app and create it again. Keep in mind that it can take some time for the new app to become broadly available due to DNS caching.
+{{< /hint >}}
 
 ### Network Health Check
 
@@ -163,3 +164,7 @@ The check endpoint or command should perform a minimal set of checks to verify w
 In the diagram below, you see how both types of checks interact with your App and how the Network Health Check differs from the Container Health Check.
 
 ![App Checks schematic](checks.png)
+
+## Going further
+
+[Configure Resources]({{< relref "/latest/user/configuration/apps/resources" >}})

@@ -179,3 +179,7 @@ _5a892a6631c5d51bc87519faa60b8624.duyqrilejt.acm-validations.aws.
 
 If `dig` does not print the expected value, double check your DNS settings and try again later, as DNS changes may take some time to propagate through the system.
 {{< /hint >}}
+
+## Going further
+
+[Create a service]({{< relref "/latest/user/configuration/services" >}}) for your new App.

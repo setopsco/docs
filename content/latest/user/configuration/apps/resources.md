@@ -45,7 +45,7 @@ Rerun the command in order to further modify the resource configuration for an A
 
 ### Scale
 
-The Scale value determines how many instances of the App are to be running simultaneously. The default value for Scale is 1. You can specify an integer value between 0 and 16. A Scale value of 0 means you do not want SetOps to run any container for this App. This may be useful to stop workers during deployments, for example.
+The Scale value determines how many Tasks (containers) of the App are to be running simultaneously. The default value for Scale is 1. You can specify an integer value between 0 and 16. A Scale value of 0 means you do not want SetOps to run any container for this App. This may be useful to stop workers during deployments, for example.
 
 In order to configure the Scale for an App, execute `resource:set scale VALUE`.
 
@@ -55,5 +55,9 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> resource:set scale 2
 The scale is a mandatory parameter. Thus, it can only be changed by running the `resource:set scale` command again, but not be removed.
 
 {{< hint info >}}
-We recommend setting the `scale` for a web App to at least `2` for reliability reasons. The second container will be served in a different availability zone. That several zones are down at the same time is less likely.
+We recommend setting the `scale` for a web App in production to at least `2` for reliability reasons. The second container will be served in a different availability zone. That several zones are down at the same time is less likely. The application however must support that requests might be served by another instance.
 {{< /hint >}}
+
+## Going further
+
+[Configure Environment Variables]({{< relref "/latest/user/configuration/apps/environment" >}})

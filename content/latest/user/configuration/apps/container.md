@@ -4,7 +4,7 @@ weight: 20
 ## Container Parameters
 ### Command
 
-Every App has a command with which the container is started. If you don't set a command for an app, the default command specified in the *Dockerfile* (or in the upstream Docker image) is used. The command in SetOps works just like the [`CMD` directive in a *Dockerfile*](https://docs.docker.com/engine/reference/builder/#cmd).
+Every App has a command with which the container is started. If you don't set a command for an app, the default command specified in the *Dockerfile* (or in the upstream Docker image) is used. The command in SetOps uses the [shell syntax](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html).
 
 You can configure your App with a command by running `container:set command -- my awesome command --flag flagvalue`.
 
@@ -123,3 +123,7 @@ A container health check configuration can be deleted with `container:unset heal
 ```shell
 setops -p <PROJECT> -s <STAGE> --app <APPNAME> container:unset health-check
 ```
+
+## Going further
+
+[Configure Network Settings]({{< relref "/latest/user/configuration/apps/network" >}})

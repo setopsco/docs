@@ -7,7 +7,7 @@ weight: 10
 {{< /hint >}}
 
 An **App** is a task that the SetOps platform runs. A stage may have many Apps. Apps are always assumed
-to be long-running. They run on our container-based platform using an image you provide. For example, web applications
+to be long-running. Each of these containers are called a **Task**. For example, web applications
 will usually have a task named `web` for the application server, and possibly a task named `job` for running background jobs. Apps are assumed to be stateless – they persist user data by accessing services.
 
 Let's create an app named `<APPNAME>` on the stage `<STAGE>` with `app:create <APPNAME>`:
@@ -34,7 +34,7 @@ setops -p <PROJECT> -s <STAGE> app
 
 The reason for this is that the `app:create` command did not change anything immediately. It was added to your current Changeset instead. Commands such as `app` or `info` always display the view of your stage the last time anyone successfully committed a changeset.
 
-Run `changeset:commit` to commit the Changeset.
+Run `setops -p <PROJECT> -s <STAGE> changeset:commit` to commit the Changeset.
 
 [Read more on Changesets here.]({{< relref "/latest/user/configuration/changesets" >}})
 
@@ -146,4 +146,4 @@ Tasks
 
 ## Going further
 
-[Create a Service]({{< relref "/latest/user/configuration/services" >}}) for your new App.
+[Configure Container Settings]({{< relref "/latest/user/configuration/apps/container" >}}) for your new App.

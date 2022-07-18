@@ -20,7 +20,7 @@ A **Stage** is a self-contained deployment environment. It is tied to a project 
 
 ## App
 
-An **App** is a task that the SetOps platform runs. A stage may have many apps. Apps are always assumed
+An **App** is a group of one or more containers that run on the SetOps platform using a container image you provide. This container image contains your application or software packages. A stage can have many Apps. Apps are always assumed
 to be long-running. They run on our container-based platform using an image you provide. For example, web applications
 will usually have a task named `web` for the application server and possibly a task called `job` for running background jobs. Apps are assumed to be stateless. They persist user data by accessing services.
 

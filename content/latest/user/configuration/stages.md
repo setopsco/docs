@@ -133,7 +133,7 @@ Created By:   karl.ranseier@setops.co
 [Commit progress...]
 ```
 
-Look at the [Apps]({{< relref "/latest/user/configuration/apps" >}}) guide to learn how to deploy your application.
+Look at the [Apps]({{< relref "/latest/user/configuration/apps/overview" >}}) guide to learn how to deploy your application.
 
 ### Delete a Stage
 

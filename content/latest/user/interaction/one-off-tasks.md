@@ -23,7 +23,7 @@ setops -p <PROJECT> -s <STAGE> --app <APPNAME> task:run -- echo "Hello World"
 
 One-Off tasks can be configured with the following parameters.
 - `--release RELEASEID` run a one- off task for a specific release
-- `--cpu CPUVALUE --memory MEMORYVALUE` run a task with a specific resource configuration (see [App Resources]({{< relref "/latest/user/configuration/apps#resources" >}}) for valid values)
+- `--cpu CPUVALUE --memory MEMORYVALUE` run a task with a specific resource configuration (see [App Resources]({{< relref "/latest/user/configuration/apps/resources" >}}) for valid values)
 - `--entrypoint "list,of,commands"` overwrite the container entrypoint for the task
 
 The following snippet is an example for a command using all configuration options.

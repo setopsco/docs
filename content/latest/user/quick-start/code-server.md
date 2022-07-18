@@ -28,7 +28,7 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    `project` and `stage` must only contain lowercase letters `a-z` and numbers `0-9` and start with a lowercase letter. The length of `project` has to be between 3 and 20 characters and the length of `stage` between 3 and 12. It also has to start with a lowercase letter. A valid example is `parkscheibe` & `staging`.
    {{< /hint >}}
 
-1. Create the [App]({{< relref "/latest/user/configuration/apps" >}}) _web_.
+1. Create the [App]({{< relref "/latest/user/configuration/apps/overview" >}}) _web_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> app:create <APPNAME>
@@ -38,12 +38,12 @@ In this tutorial, you will deploy your own [OpenVSCode Server](https://github.co
    The name for apps must only contain lowercase letters `a-z` and numbers `0-9` and dashes `-`. The name must be between 3 and 16 characters long and start with a lowercase letter.
    {{< /hint >}}
 
-   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/latest/user/configuration/apps#public" >}}) to _true_.
+   We want it to be publicly reachable, so we set the network's [_public_ option]({{< relref "/latest/user/configuration/apps/network#public" >}}) to _true_.
 
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set public true
    ```
-   The default exposed [port]({{< relref "/latest/user/configuration/apps#port" >}}) of the Server is `3000`, so let's change it:
+   The default exposed [port]({{< relref "/latest/user/configuration/apps/network#port" >}}) of the Server is `3000`, so let's change it:
    ```shell
    setops -p <PROJECT> -s <STAGE> --app <APPNAME> network:set port 3000
    ```
